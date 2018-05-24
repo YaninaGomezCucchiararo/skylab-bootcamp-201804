@@ -21,15 +21,15 @@ class Note {
 
 const path = './data/notes.json'
 
-const _notes = JSON.parse(fs.readFileSync(path))
+const notes = JSON.parse(fs.readFileSync(path))
 
 function save() {
-    fs.writeFileSync(path, JSON.stringify(_notes, null, 4))
+    fs.writeFileSync(path, JSON.stringify(notes, null, 4))
 }
 
 const logic = {
     get _notes() {
-        return _notes
+        return notes
     },
 
     /**

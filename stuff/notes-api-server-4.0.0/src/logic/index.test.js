@@ -1,32 +1,53 @@
 'use strict'
 
+const { MongoClient, ObjectId } = require('mongodb')
 const expect = require('expect')
-const logic = require('./logic')
+const logic = require('.')
 
 describe('logic (notes)', () => {
-    const { _notes } = logic
+    let cn, db, cl
     const userId = '123'
 
-    beforeEach(() => _notes.length = 0)
+    before(done => {
+        MongoClient.connect('mongodb://localhost:27017/skylab-bootcamp-201804-test', { useNewUrlParser: true }, (err, conn) => {
+            if (err) throw err
+
+            cn = conn
+            db = cn.db()
+            cl = db.collection('notes')
+
+            logic.init(db)
+
+            done()
+        })
+    })
+
+    // beforeEach(done => {
+    //     cl.deleteMany()
+    //         .then(() => done())
+    // })
+
+    beforeEach(() => cl.deleteMany())
+
+    after(done => db.dropDatabase(() => cn.close(done)))
 
     describe('add note', () => {
-        it('should add on correct data', () => {
-            expect(_notes.length).toBe(0)
+        it('should add on correct data', () =>
+            logic.addNote(userId, 'my note')
+                .then(id => {
+                    expect(id).toBeDefined()
 
-            const id = logic.addNote(userId, 'my note')
+                    return cl.findOne({ _id: ObjectId(id) })
+                        .then(note => {
+                            expect(note._id).toBeDefined()
+                            expect(note._id.toString()).toBe(id)
+                            expect(note.userId).toBe(userId)
+                            expect(note.text).toBe('my note')
+                        })
+                })
+        )
 
-            expect(id).toBeDefined()
-            expect(_notes.length).toBe(1)
-
-            const [note] = _notes
-
-            expect(note.id).toBeDefined()
-            expect(note.id).toBe(id)
-            expect(note.userId).toBe(userId)
-            expect(note.text).toBe('my note')
-        })
-
-        it('should add notes with different ids', () => {
+        false && it('should add notes with different ids', () => {
             expect(_notes.length).toBe(0)
 
             logic.addNote(userId, 'my note 1')
@@ -49,32 +70,33 @@ describe('logic (notes)', () => {
             expect(note3.userId).toBe(userId)
         })
 
-        it('should throw error on no userId', () => {
-            expect(() => logic.addNote()).toThrowError('userId is not a string')
-        })
+        it('should throw error on no userId', () =>
+            logic.addNote()
+                .catch(({ message }) => expect(message).toBe('userId is not a string'))
+        )
 
-        it('should throw error on empty userId', () => {
+        false && it('should throw error on empty userId', () => {
             expect(() => logic.addNote('')).toThrowError('userId is empty or blank')
         })
 
-        it('should throw error on blank userId', () => {
+        false && it('should throw error on blank userId', () => {
             expect(() => logic.addNote('   ')).toThrowError('userId is empty or blank')
         })
 
-        it('should throw error on no text', () => {
+        false && it('should throw error on no text', () => {
             expect(() => logic.addNote(userId)).toThrowError('text is not a string')
         })
 
-        it('should throw error on empty text', () => {
+        false && it('should throw error on empty text', () => {
             expect(() => logic.addNote(userId, '')).toThrowError('text is empty or blank')
         })
 
-        it('should throw error on blank text', () => {
+        false && it('should throw error on blank text', () => {
             expect(() => logic.addNote(userId, '   ')).toThrowError('text is empty or blank')
         })
     })
 
-    describe('list notes', () => {
+    false && describe('list notes', () => {
         it('should succeed on correct data', () => {
             expect(_notes.length).toBe(0)
 
@@ -127,7 +149,7 @@ describe('logic (notes)', () => {
         })
     })
 
-    describe('retrieve note', () => {
+    false && describe('retrieve note', () => {
         it('should succeed on correct data', () => {
             expect(_notes.length).toBe(0)
 
@@ -182,7 +204,7 @@ describe('logic (notes)', () => {
         })
     })
 
-    describe('remove note', () => {
+    false && describe('remove note', () => {
         it('should remove a note', () => {
             expect(_notes.length).toBe(0)
 
@@ -235,7 +257,7 @@ describe('logic (notes)', () => {
         })
     })
 
-    describe('update note', () => {
+    false && describe('update note', () => {
         it('should succeed on correct data', () => {
             expect(_notes.length).toBe(0)
 
@@ -305,7 +327,7 @@ describe('logic (notes)', () => {
         })
     })
 
-    describe('search notes', () => {
+    false && describe('search notes', () => {
         it('should return results on matching text', () => {
             expect(_notes.length).toBe(0)
 

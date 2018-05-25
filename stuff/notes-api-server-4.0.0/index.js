@@ -5,6 +5,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const router = require('./src/routes')
 const logic = require('./src/logic')
+const cors = require('cors')
 
 MongoClient.connect('mongodb://localhost:27017/skylab-bootcamp-201804', { useNewUrlParser: true }, (err, conn) => {
     if (err) throw err
@@ -16,6 +17,9 @@ MongoClient.connect('mongodb://localhost:27017/skylab-bootcamp-201804', { useNew
     const port = process.argv[2] || 3000
 
     const app = express()
+
+    app.use(cors())
+
     app.use(bodyParser.json()) // middleware
 
     app.use('/api', router)

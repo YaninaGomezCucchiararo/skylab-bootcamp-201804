@@ -7,7 +7,9 @@
     "start": "node .",
     "watch": "nodemon .",
     "debug": "node debug .",
-    "test": "mocha src/logic/"
+    "test": "mocha src/logic/",
+    "coverage": "nyc mocha src/logic/",
+    "coverage-report": "nyc --reporter=html --reporter=text mocha src/logic/"
   },
   "keywords": [],
   "author": "",
@@ -15,10 +17,12 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "mongoose": "^5.1.2"
   },
   "devDependencies": {
-    "expect": "^22.4.3"
+    "chai": "^4.1.2",
+    "lodash": "^4.17.10"
   }
 }

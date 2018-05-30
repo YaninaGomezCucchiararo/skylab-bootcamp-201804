@@ -28,7 +28,36 @@ const notesApi = {
                     .then(({ status, data }) => status === 201 && data.status === 'OK')
                     .catch(({ response: { data: { error } } }) => error)
             })
-    }
+    },
+
+    /**
+     * 
+     * @param {string} email 
+     * @param {string} password 
+     * 
+     * @returns {Promise<string>}
+     */
+    authenticateUser(email, password) {
+        return Promise.resolve()
+            .then(() => {
+                if (typeof email !== 'string') throw Error('user email is not a string')
+
+                if (!(email = email.trim()).length) throw Error('user email is empty or blank')
+
+                if (typeof password !== 'string') throw Error('user password is not a string')
+
+                if ((password = password.trim()).length === 0) throw Error('user password is empty or blank')
+
+                return User.findOne({ email, password })
+            })
+            .then(user => {
+                
+                if (!user) throw Error('wrong credentials')
+
+                return user.id
+            })
+    },
+
 }
 
 module.exports = notesApi

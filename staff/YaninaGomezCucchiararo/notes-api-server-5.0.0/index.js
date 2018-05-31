@@ -1,37 +1,37 @@
 'use strict'
 
-const { MongoClient } = require('mongodb')
+require('dotenv').config()
+
+const mongoose = require('mongoose')
 const express = require('express')
 const bodyParser = require('body-parser')
 const router = require('./src/routes')
-const logic = require('./src/logic')
 const cors = require('cors')
 
-MongoClient.connect('mongodb://localhost:27017/skylab-bootcamp-201804', { useNewUrlParser: true }, (err, conn) => {
-    if (err) throw err
+const { env: { PORT, DB_URL } } = process
 
-    const db = conn.db()
+mongoose.connect(DB_URL)
+    .then(() => {
+        const port = PORT || process.argv[2] || 3000
 
-    logic.init(db)
+        const app = express()
 
-    const port = process.argv[2] || 3000
+        app.use(cors())
 
-    const app = express()
+        app.use(bodyParser.json()) // middleware
 
-    app.use(cors())
+        app.use('/api', router)
 
-    app.use(bodyParser.json()) // middleware
+        app.listen(port, () => console.log(`server running on port ${port}`))
 
-    app.use('/api', router)
+        process.on('SIGINT', () => {
+            console.log('\nstopping server')
 
-    app.listen(port, () => console.log(`server running on port ${port}`))
+            mongoose.connection.close(() => {
+                console.log('db connection closed')
 
-    process.on('SIGINT', () => {
-        console.log('\nstopping server')
-
-        conn.close()
-
-        process.exit()
+                process.exit()
+            })
+        })
     })
-
-})
+    .catch(console.error)

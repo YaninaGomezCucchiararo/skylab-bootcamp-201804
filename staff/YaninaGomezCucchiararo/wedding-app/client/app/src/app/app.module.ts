@@ -16,9 +16,10 @@ import { FooterComponent } from './shared/footer/footer.component';
 
 
 
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, 
     RegisterComponent,
     LoginComponent,
     ProductDetailComponent,

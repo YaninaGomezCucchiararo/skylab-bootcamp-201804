@@ -27,7 +27,7 @@ describe('logic wedding-app', () => {
         indexes.length = 0
         while (count--) indexes.push(count)
 
-        return Promise.all([User.remove()/*, Note.deleteMany()*/])
+        return Promise.all([User.remove(), Product.deleteMany()])
     })
 
     false && describe('resgister user', () => {
@@ -375,6 +375,41 @@ describe('logic wedding-app', () => {
                         })
                 })
         )
+    })
+
+    describe('list products', () => {
+        const product = { owner: '123456781234567812345678', image: 'image', price: 200, size: 42, color: 'white' }
+
+        it('should succeed on correct data', () => {
+            return Promise.all([
+                new Product(product).save()
+            ])
+                .then(([product]) => {
+                    return logic.listProducts()
+                        .then(res => {
+                            console.log(res)
+                            expect(res.length).to.be.equal(1)
+                            expect(res[0]._id).to.be.exist
+                            expect(res[0].owner).to.be.exist
+                            expect(res[0].image).to.be.equal('image')
+                            expect(res[0].price).to.be.exist
+                            expect(res[0].price).to.be.equal(200)
+                        })
+                })
+            // User.create(userData)
+            //     .then(({ id: userId }) => {
+            //         const { image, price, size, color } = productData
+
+            //         new Product()
+
+            //         // return logic.addProductToUser(userId, image, price, size, color)
+            //         //     .then(products => {
+            //         //         return logic.listProducts()
+            //         //             .then(products => {
+            //         //                 return products
+            //         //             })
+            //         //     })
+        })
     })
 
     after(done => mongoose.connection.db.dropDatabase(() => mongoose.connection.close(done))) // cerrar la base de datos una vez finalice la bateria de test

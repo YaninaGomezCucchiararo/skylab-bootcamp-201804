@@ -209,7 +209,6 @@ const logic = {
 
             return Product.create({ owner: ownerId, image, price, size, color })
               .then(({ _doc: { _id } }) => {
-
                 user.products.push(_id)
 
                 return user.save()
@@ -219,10 +218,19 @@ const logic = {
       })
 
   },
+  
+  listProducts() {
+    return Promise.resolve()
+      .then(() => {
 
-  listProducts() { },
+        return Product.find({})
+          .then(products => {
+            return products
+          })
+      })
+  },
 
-  listUserProducts() { },
+  // listUserProducts() { },
 
 
 

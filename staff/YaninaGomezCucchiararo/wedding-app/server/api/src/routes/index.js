@@ -90,10 +90,23 @@ router.delete('/users/:userId', [jwtValidator, jsonBodyParser], (req, res) => {
 router.post('/users/:userId/products', [jwtValidator, jsonBodyParser], (req, res) =>{
     const { params: { userId }, body: { imgUrl, price, size, color } } = req
 
-    logic.addProduct(imgUrl, price, size, color, ownerId)
+    logic.addProductToUser(userId, imgUrl, price, size, color)
         .then(() => {
             res.status(201)
             res.json({ status: 'OK'})
+        })
+        .catch(({ message }) => {
+            res.status(400)
+            res.json({ status: 'KO', error: message })
+        })
+})
+
+router.get('/products', (req, res) =>{
+    
+    logic.listProducts()
+        .then((products) => {
+            res.status(200)
+            res.json({ status: 'OK', data: products})
         })
         .catch(({ message }) => {
             res.status(400)

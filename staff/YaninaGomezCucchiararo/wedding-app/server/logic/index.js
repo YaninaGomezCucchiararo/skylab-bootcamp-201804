@@ -190,11 +190,12 @@ const logic = {
       .then(() => true)
   },
 
-  addProduct(imgUrl, price, size, color, ownerId) {
+  addProductToUser(ownerId, image, price, size, color) {
     return Promise.resolve()
-      .then(()=> {
+      .then(() => {
+        if (typeof ownerId !== 'string') throw Error('owner id is not a string')
 
-        if (typeof imgUrl !== 'string') throw Error('imgUrl is not a string')
+        if (typeof image !== 'string') throw Error('image is not a string')
 
         if (typeof price !== 'number') throw Error('price is not a number')
 
@@ -202,25 +203,26 @@ const logic = {
 
         if (typeof color !== 'string') throw Error('color is not a string')
 
-        if (typeof ownerId !== 'string') throw Error('ownerId is not a string')
-
-        return User.findOne({ _id: ownerId })
+        return User.findById(ownerId)
           .then(user => {
             if (!user) throw Error(`ownerId not exists`) // manejarlo dsd cliente si no está logged
 
-            return Product.create({ imgUrl, price, size, color, ownerId })
-              .then((_id) => {
-               
-                User.products.push(_id)
+            return Product.create({ owner: ownerId, image, price, size, color })
+              .then(({ _doc: { _id } }) => {
+
+                user.products.push(_id)
+
+                return user.save()
+                  .then(() => _id.toString())
               })
-          }).then(() => true)
+          })
       })
 
   },
-  
-  listProducts() {},
 
-  listUserProducts() {},
+  listProducts() { },
+
+  listUserProducts() { },
 
 
 

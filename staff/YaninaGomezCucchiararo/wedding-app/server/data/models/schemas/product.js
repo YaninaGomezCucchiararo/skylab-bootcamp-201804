@@ -1,10 +1,15 @@
-const mongoose = require ('mongoose')
+const mongoose = require('mongoose')
 
-const {Schema, Schema:{ObjectId}} = mongoose
+const { Schema, Schema: { ObjectId } } = mongoose
 
 
-module.exports = new Schema ({
-    imgUrl: {
+module.exports = new Schema({
+    owner: {
+        type: ObjectId,
+        ref: 'User'
+    },
+
+    image: {
         type: String,
         required: true
     },
@@ -18,16 +23,10 @@ module.exports = new Schema ({
         type: Number,
         required: true
     },
-    
+
     color: {
         type: String,
         required: true
-    },
-
-    ownerId: {
-        type: ObjectId,
-        ref: 'User'
     }
-
 })
 

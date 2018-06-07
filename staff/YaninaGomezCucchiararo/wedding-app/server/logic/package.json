@@ -2,11 +2,12 @@
   "name": "logic",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "test": "mocha src/",
-    "coverage": "nyc mocha src/",
-    "coverage-report": "nyc --reporter=html --reporter=text mocha src/"
+    "test": "mocha .",
+    "debug-test": "mocha debug .",
+    "coverage": "nyc mocha .",
+    "coverage-report": "nyc --reporter=html --reporter=text mocha ."
   },
   "keywords": [],
   "author": "",

@@ -2,7 +2,7 @@
 
 require('dotenv').config()
 
-const { mongoose, models: { User, Product} } = require('data')
+const { mongoose, models: { User, Product } } = require('data')
 const { expect } = require('chai')
 const logic = require('.')
 const _ = require('lodash')
@@ -10,15 +10,16 @@ const _ = require('lodash')
 
 const { env: { DB_URL } } = process
 
-describe('logic wedding-app', ()=>{
+describe('logic wedding-app', () => {
     const userData = { username: 'yanina', location: 'Barcelona', email: 'y@mail.com', password: '123' }
     const otherUserData = { username: 'vanesa', location: 'Madrid', email: 'vanesa@mail.com', password: '456' }
+    const productData = { image: 'image', price: 200, size: 42, color: 'white' }
 
     const dummyUserId = '123456781234567812345678'
     const dummyNoteId = '123456781234567812345678'
-    
+
     const indexes = []
-    
+
     before(() => mongoose.connect(DB_URL))
 
     beforeEach(() => {
@@ -29,7 +30,7 @@ describe('logic wedding-app', ()=>{
         return Promise.all([User.remove()/*, Note.deleteMany()*/])
     })
 
-    false &&  describe('resgister user', () => {
+    false && describe('resgister user', () => {
         it('should succeed on correct data', () => {
             logic.registerUser('yanina', 'Barcelona', 'y@gmail.com', '123')
                 .then(res => expect(res).to.be.true)
@@ -37,14 +38,14 @@ describe('logic wedding-app', ()=>{
 
         it('should fail on already registered user', () => {
             User.create(userData)
-             .then(()=> {
-                 const { username, location, email, password } = userData
+                .then(() => {
+                    const { username, location, email, password } = userData
 
-                 return logic.registerUser(username, location, email, password)
-             })
-             .catch(({ message }) => {
-                 expect(message).to.equal(`user with email ${userData.email} already exists`)
-             })
+                    return logic.registerUser(username, location, email, password)
+                })
+                .catch(({ message }) => {
+                    expect(message).to.equal(`user with email ${userData.email} already exists`)
+                })
         })
 
         it('should fail on no username', () =>
@@ -131,8 +132,8 @@ describe('logic wedding-app', ()=>{
             logic.authenticateUser(userData.email, '     ')
                 .catch(({ message }) => expect(message).to.equal('user password is empty or blank'))
         )
-    }) 
-    
+    })
+
     false && describe('retrieve user', () => {
         it('should succeed on correct data', () =>
             User.create(userData)
@@ -171,7 +172,7 @@ describe('logic wedding-app', ()=>{
         )
     })
     //===================Update===================//
-    false &&  describe('udpate user', () => {
+    false && describe('udpate user', () => {
         it('should succeed on correct data', () =>
             User.create(userData)
                 .then(({ id }) => {
@@ -285,7 +286,7 @@ describe('logic wedding-app', ()=>{
     })
 
     //==================Unregister====================//
-    false &&  describe('unregister user', () => {
+    false && describe('unregister user', () => {
         it('should succeed on correct data', () =>
             User.create(userData)
                 .then(({ id }) => {
@@ -350,27 +351,33 @@ describe('logic wedding-app', ()=>{
     //==================== Add Product =====================//
     describe('add product', () => {
         it('should succeed on correct data', () =>
-           User.create(userData)
-                .then(({id}) => {
-                    console.log(typeof id)
-                
-                    return logic.addProduct('image', 200, 42, 'white', id)
-                        .then(objectId => {
-                            
-                            expect(objectId).to.exist
+            User.create(userData)
+                .then(({ id: userId }) => {
+                    const { image, price, size, color } = productData
 
-                            return User.findById(id)
+                    return logic.addProductToUser(userId, image, price, size, color)
+                        .then(productId => {
+                            expect(productId).to.exist
+                            expect(productId).to.be.a('string')
+
+                            return User.findById(userId)
                                 .then(user => {
                                     expect(user).to.exist
 
                                     expect(user.products).to.exist
-                                    expect(user.notes.length).to.equal(1)
+                                    expect(user.products.length).to.equal(1)
+
+                                    const { products: [product] } = user
+
+                                    expect(product._id).to.exist
+                                    expect(product._id.toString()).to.equal(productId)
                                 })
                         })
                 })
         )
-})
+    })
 
+    after(done => mongoose.connection.db.dropDatabase(() => mongoose.connection.close(done))) // cerrar la base de datos una vez finalice la bateria de test
 })
 
 

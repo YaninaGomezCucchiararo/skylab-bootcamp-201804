@@ -3,8 +3,8 @@ import { Routes, RouterModule } from "@angular/router"
 import { HomepageComponent } from './homepage/homepage.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from "./auth/login/login.component";
-import { ProductAddComponent } from './product/product-add/product-add.component';
-import { ProductDetailComponent } from "./product/product-detail/product-detail.component";
+import { ProductAddComponent } from './products/product-add/product-add.component';
+import { ProductDetailComponent } from "./products/product-detail/product-detail.component";
 
 const routes: Routes = [ //aqui estaran todas nuestras rutas
     { path: '', component: HomepageComponent },//hemos creado nuestra primera ruta!

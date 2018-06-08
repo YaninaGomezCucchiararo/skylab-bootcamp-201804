@@ -1,6 +1,6 @@
 
 export interface Product {
-    imgurl: string;
+    image: string;
     price:  string;
     size: string;
     color: string;

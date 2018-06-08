@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ProductsService } from '../products.service';
 import { HttpClient } from '@angular/common/http';
 import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
@@ -12,13 +13,19 @@ export class HomepageComponent implements OnInit {
   public  searchInput: FormControl;
   public vestidos: any[] = [];
 
+  products:any[] = [];
+
   constructor(
-    private http: HttpClient  
+    private http: HttpClient,
+    private _productsService: ProductsService  
   ) { }
 
 	ngOnInit() {
-    //console.log(this.http)
-		this.searchInput = new FormControl();
+
+    // this.products = this._productsService.getProducts();
+    // console.log(this.products);
+
+    this.searchInput = new FormControl();
     this.searchInput.valueChanges
       .pipe(
         debounceTime(400), //este es para establecer un time en la busqueda "restraso"
@@ -29,11 +36,30 @@ export class HomepageComponent implements OnInit {
       ) //es un metodo q recibe argumentos tantos queramos, cada argumento es un operador de rxjs, se realiza antes de enviarlo al observado
 			.subscribe((value: string) => {
         //console.warn(value);
-        this.http.get(`https://api.github.com/search/repositories?q=${value}`)
+        this.http.get(`mongodb://localhost/skylab-bootcamp-201804-test?q=${value}`)
         .subscribe((data:any) =>{
-          this.vestidos = data.items
+          this.vestidos = data.price
         })
 			});
+
+
+    //console.log(this.http)
+		// this.searchInput = new FormControl();
+    // this.searchInput.valueChanges
+    //   .pipe(
+    //     debounceTime(400), //este es para establecer un time en la busqueda "restraso"
+    //     distinctUntilChanged(),
+    //     filter((value: string) => {
+    //       return value.length > 0; //minimo un caracter
+    //     })
+    //   ) //es un metodo q recibe argumentos tantos queramos, cada argumento es un operador de rxjs, se realiza antes de enviarlo al observado
+		// 	.subscribe((value: string) => {
+    //     //console.warn(value);
+    //     this.http.get(`https://api.github.com/search/repositories?q=${value}`)
+    //     .subscribe((data:any) =>{
+    //       this.vestidos = data.items
+    //     })
+		// 	});
 	}
 
 }

@@ -22,9 +22,9 @@ mongoose.connect(DB_URL)
                         console.log(`inserted user ${_id.toString()}`)
 
                         return Promise.all([
-                            Product.create({ image: 'http://images.com/1234', price: 100, size: 42, color: 'white', owner: _id }),
-                            Product.create({ image: 'http://images.com/12345', price: 120, size: 38, color: 'cream', owner: _id }),
-                            Product.create({ image: 'http://images.com/123456', price: 140, size: 40, color: 'black', owner: _id })
+                            Product.create({ image: 'https://www.hola.com/novias/galeria/2016071187068/vestidos-novia-sencillos-tendencias-2017/1/', price: 100, size: 42, color: 'white', owner: _id }),
+                            Product.create({ image: 'https://www.hola.com/novias/galeria/2016071187068/vestidos-novia-sencillos-tendencias-2017/1/', price: 120, size: 38, color: 'cream', owner: _id }),
+                            Product.create({ image: 'https://www.hola.com/novias/galeria/2016071187068/vestidos-novia-sencillos-tendencias-2017/1/', price: 140, size: 40, color: 'black', owner: _id })
                         ])
                             .then(res => {
                                 res.forEach(item => console.log(`inserted dress ${item._doc._id}`))

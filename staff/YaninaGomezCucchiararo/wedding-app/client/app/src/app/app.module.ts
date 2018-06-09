@@ -4,7 +4,7 @@ import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 
 //SERVICES:
-import { ProductsService } from './products.service';
+import { ProductsService } from './services/products.service';
 
 // COMPONENTS:
 import { AppComponent } from './app.component';
@@ -16,10 +16,6 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AppRoutingModule } from './app-routing-.module';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-
-
-
-
 
 
 

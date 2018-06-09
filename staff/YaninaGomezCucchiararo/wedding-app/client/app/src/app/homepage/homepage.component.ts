@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ProductsService } from '../products.service';
-import { HttpClient } from '@angular/common/http';
 import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators'
+import { Product } from './../models/product'
+
+//Service:
+import { ProductsService } from '../services/products.service';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
 	selector: 'homepage',
@@ -10,57 +13,17 @@ import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators'
 	styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  public  searchInput: FormControl;
-  public vestidos: any[] = [];
+  public searchInput: FormControl;
 
-  products:any[] = [];
+  products: Observable<Product[]>;
 
   constructor(
-    private http: HttpClient,
-    private _productsService: ProductsService  
+    private productsService: ProductsService
   ) { }
 
 	ngOnInit() {
-
-    // this.products = this._productsService.getProducts();
-    // console.log(this.products);
-
-    this.searchInput = new FormControl();
-    this.searchInput.valueChanges
-      .pipe(
-        debounceTime(400), //este es para establecer un time en la busqueda "restraso"
-        distinctUntilChanged(),
-        filter((value: string) => {
-          return value.length > 0; //minimo un caracter
-        })
-      ) //es un metodo q recibe argumentos tantos queramos, cada argumento es un operador de rxjs, se realiza antes de enviarlo al observado
-			.subscribe((value: string) => {
-        //console.warn(value);
-        this.http.get(`mongodb://localhost/skylab-bootcamp-201804-test?q=${value}`)
-        .subscribe((data:any) =>{
-          this.vestidos = data.price
-        })
-			});
-
-
-    //console.log(this.http)
-		// this.searchInput = new FormControl();
-    // this.searchInput.valueChanges
-    //   .pipe(
-    //     debounceTime(400), //este es para establecer un time en la busqueda "restraso"
-    //     distinctUntilChanged(),
-    //     filter((value: string) => {
-    //       return value.length > 0; //minimo un caracter
-    //     })
-    //   ) //es un metodo q recibe argumentos tantos queramos, cada argumento es un operador de rxjs, se realiza antes de enviarlo al observado
-		// 	.subscribe((value: string) => {
-    //     //console.warn(value);
-    //     this.http.get(`https://api.github.com/search/repositories?q=${value}`)
-    //     .subscribe((data:any) =>{
-    //       this.vestidos = data.items
-    //     })
-		// 	});
-	}
+    this.products = this.productsService.getProducts();
+  }
 
 }
 
@@ -87,3 +50,33 @@ export class HomepageComponent implements OnInit {
 //   }
 
 // }
+
+
+//......................codigo eze...................
+
+  // public  searchInput: FormControl;
+  // public vestidos: any[] = [];
+
+// this.products = this._productsService.getProducts();
+    // console.log(this.products);
+
+   
+
+
+    //console.log(this.http)
+		// this.searchInput = new FormControl();
+    // this.searchInput.valueChanges
+    //   .pipe(
+    //     debounceTime(400), //este es para establecer un time en la busqueda "restraso"
+    //     distinctUntilChanged(),
+    //     filter((value: string) => {
+    //       return value.length > 0; //minimo un caracter
+    //     })
+    //   ) //es un metodo q recibe argumentos tantos queramos, cada argumento es un operador de rxjs, se realiza antes de enviarlo al observado
+		// 	.subscribe((value: string) => {
+    //     //console.warn(value);
+    //     this.http.get(`https://api.github.com/search/repositories?q=${value}`)
+    //     .subscribe((data:any) =>{
+    //       this.vestidos = data.items
+    //     })
+		// 	});

@@ -6,8 +6,8 @@ import { LoginComponent } from "./auth/login/login.component";
 import { ProductAddComponent } from './products/product-add/product-add.component';
 import { ProductDetailComponent } from "./products/product-detail/product-detail.component";
 
-const routes: Routes = [ //aqui estaran todas nuestras rutas
-    { path: '', component: HomepageComponent },//hemos creado nuestra primera ruta!
+const routes: Routes = [ 
+    { path: '', component: HomepageComponent },
     { path: 'register', component: RegisterComponent},
     { path: 'login', component: LoginComponent},
     { path: 'product/add', component: ProductAddComponent},
@@ -20,5 +20,5 @@ const routes: Routes = [ //aqui estaran todas nuestras rutas
     ],
     exports: [RouterModule]
 
-})
+}) 
 export class AppRoutingModule {} 

@@ -16,6 +16,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AppRoutingModule } from './app-routing-.module';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { LoadingComponent } from './shared/loading/loading.component';
 
 
 
@@ -29,6 +30,7 @@ import { FooterComponent } from './shared/footer/footer.component';
     HomepageComponent,
     HeaderComponent,
     FooterComponent,
+    LoadingComponent,
     
   ],
   imports: [

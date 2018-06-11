@@ -23,14 +23,14 @@ mongoose.connect(DB_URL)
 
                         return Promise.all([
                             Product.create({ image: 'https://www.hola.com/novias/galeria/2016071187068/vestidos-novia-sencillos-tendencias-2017/1/', price: 100, size: 42, color: 'white', owner: _id }),
-                            Product.create({ image: 'https://www.hola.com/novias/galeria/2016071187068/vestidos-novia-sencillos-tendencias-2017/1/', price: 120, size: 38, color: 'cream', owner: _id }),
-                            Product.create({ image: 'https://www.hola.com/novias/galeria/2016071187068/vestidos-novia-sencillos-tendencias-2017/1/', price: 140, size: 40, color: 'black', owner: _id })
+                            Product.create({ image: 'http://www.venenoenlapiel.com/7910-home_default/vestido-novia-manga-larga.jpg', price: 120, size: 38, color: 'cream', owner: _id }),
+                            Product.create({ image: 'https://www.airebarcelona.com/wp-content/uploads/2017/10/Novia-aire-2018.jpg', price: 140, size: 40, color: 'black', owner: _id })
                         ])
                             .then(res => {
-                                res.forEach(item => console.log(`inserted dress ${item._doc._id}`))
+                                res.forEach(item => console.log(`inserted dress ${item._doc._id}`))     
                             })
                     })
             })
     })
     .then(() => mongoose.connection.close(() => console.log('done')))
-    .catch(console.error)
+    .catch(console.error)   

@@ -13,12 +13,18 @@ export class ProductsService {
     private http: HttpClient
   ) { }
 
-getProducts(): Observable<Product[]> {
-  return this.http.get('http://localhost:5000/api/products')
-    .pipe(
-      switchMap((res: any) => of(res.data)),
-      tap(res => console.log('Response:', res))
-    );
-}
+  getProducts(){
+    return this.http.get('http://localhost:5000/api/products')
+  }
+
+  
+//EZE:
+// getProducts(): Observable<Product[]> {
+//   return this.http.get('http://localhost:5000/api/products')
+//     .pipe(
+//       switchMap((res: any) => of(res.data)),
+//       tap(res => console.log('Response:', res)),
+//     );
+// }
 
 }

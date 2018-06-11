@@ -230,10 +230,26 @@ const logic = {
       })
   },
 
-  // listUserProducts() { },
+  productInfo (userId, productId) {
+    return Promise.resolve()
+      .then(() => {
+        if ( userId === undefined ) throw Error ('user is not valid')
 
+        if (typeof userId !== 'string') throw Error('user id is not a string')
 
+        if (!(userId = userId.trim()).length) throw Error('user id is empty or blank')
 
+        if (typeof productId !== 'string') throw Error('product id is not a string')
 
+        if (!(productId = productId.trim()).length) throw Error('product id is empty or blank')
+
+        return Product.findById({_id:productId}).select({ image: 1, price: 1, size: 1, color: 1})
+      })
+      .then(product => {
+        if (!product) throw Error(`no product found with id ${productId}`)
+
+        return product
+      })
+  }
 }
 module.exports = logic

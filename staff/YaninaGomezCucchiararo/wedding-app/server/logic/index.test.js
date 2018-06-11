@@ -16,7 +16,7 @@ describe('logic wedding-app', () => {
     const productData = { image: 'image', price: 200, size: 42, color: 'white' }
 
     const dummyUserId = '123456781234567812345678'
-    const dummyNoteId = '123456781234567812345678'
+    const dummyProductId = '123456781234567812345678'
 
     const indexes = []
 
@@ -376,7 +376,7 @@ describe('logic wedding-app', () => {
                 })
         )
     })
-
+//==================== List Products =====================//
     describe('list products', () => {
         const product = { owner: '123456781234567812345678', image: 'image', price: 200, size: 42, color: 'white' }
 
@@ -396,24 +396,23 @@ describe('logic wedding-app', () => {
                             expect(res[0].price).to.be.equal(200)
                         })
                 })
-            // User.create(userData)
-            //     .then(({ id: userId }) => {
-            //         const { image, price, size, color } = productData
-
-            //         new Product()
-
-            //         // return logic.addProductToUser(userId, image, price, size, color)
-            //         //     .then(products => {
-            //         //         return logic.listProducts()
-            //         //             .then(products => {
-            //         //                 return products
-            //         //             })
-            //         //     })
         })
     })
+//====================  Info Product =====================//
+    describe('info product', () => {
+        const product = { owner: '123456781234567812345678', image: 'image', price: 200, size: 42, color: 'white' }
+
+        it('should succed on correct data', () => {
+           Product.create(product)
+            .then({_id} => {
+                console.log(res)
+            })
+    })
+
+
 
     after(done => mongoose.connection.db.dropDatabase(() => mongoose.connection.close(done))) // cerrar la base de datos una vez finalice la bateria de test
 })
 
 
-
+})

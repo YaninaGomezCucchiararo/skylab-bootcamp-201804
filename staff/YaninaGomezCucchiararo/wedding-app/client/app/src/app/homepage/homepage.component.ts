@@ -10,19 +10,33 @@ import { Subscription, Observable } from 'rxjs';
 @Component({
 	selector: 'homepage',
 	templateUrl: './homepage.component.html',
-	styleUrls: ['./homepage.component.css']
+	styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
-  public searchInput: FormControl;
+ // public searchInput: FormControl;
+  
+ //EZE:
+  //products: Observable<Product[]>;
+  products: Product[] = [];
+  loading: boolean;
 
-  products: Observable<Product[]>;
+  constructor( private productsService: ProductsService ) { 
 
-  constructor(
-    private productsService: ProductsService
-  ) { }
+    this.loading = true;
+
+    this.productsService.getProducts()
+      .subscribe( (data: any) => {
+        console.log(data.data);
+        this.products = data.data;
+        this.loading = false;
+        
+      })
+  }
 
 	ngOnInit() {
-    this.products = this.productsService.getProducts();
+    //EZE:
+    // this.products = this.productsService.getProducts();
+    
   }
 
 }

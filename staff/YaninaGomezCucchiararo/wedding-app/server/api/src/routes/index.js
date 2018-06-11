@@ -60,6 +60,7 @@ router.get('/users/:userId', jwtValidator, (req, res) => {
 })
 
 router.patch('/users/:userId', [jwtValidator, jsonBodyParser], (req, res) => {
+    
     const { params: { userId }, body: { username, location, email, password, newEmail, newPassword } } = req
 
     logic.updateUser(userId, username, location, email, password, newEmail, newPassword)
@@ -74,6 +75,7 @@ router.patch('/users/:userId', [jwtValidator, jsonBodyParser], (req, res) => {
 })
 
 router.delete('/users/:userId', [jwtValidator, jsonBodyParser], (req, res) => {
+    
     const { params: { userId }, body: { email, password } } = req
 
     logic.unregisterUser(userId, email, password)
@@ -112,6 +114,21 @@ router.get('/products', (req, res) =>{
             res.status(400)
             res.json({ status: 'KO', error: message })
         })
+})
+
+router.get('/users/:userId/products/:productId', [jwtValidator, jsonBodyParser], (req, res) => {
+    
+    const { params: { userId, productId } } = req
+    
+    logic.productInfo(userId, productId)
+        .then((product) => {
+            res.status(200)
+            res.json({ status: 'OK', data: product })
+        })
+        .catch(({ message }) => {
+            res.status(400)
+            res.json({ status: 'KO', error: message })
+        })   
 })
 
 

@@ -1,65 +1,13 @@
-<!-- <section>
-  <div class="logo"><p>Logo</p></div>
-  <div class="actions">
-    <button [routerLink]="['/']">Vestidos</button>
-    <button [routerLink]="['/register']">Register</button>
-    <button [routerLink]="['/login']">Login</button>
-    <button>Logout</button>
-  </div>
-
-</section> -->
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */
-
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-  </style>
-</head>
-
-<body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Logo</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li>
-            <a [routerLink]="['']">Vestidos</a>
-          </li>
-          <li>
-            <a [routerLink]="['register']">Registro</a>
-          </li>
-          <li>
-            <a>Logout</a>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a [routerLink]="['login']">
-              <span class="glyphicon glyphicon-log-in"></span> Login</a>
-          </li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Més que nuvies...</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" [routerLink]="['']">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" [routerLink]="['register']">Regístrate</a>
+      <a class="nav-item nav-link" [routerLink]="['login']">Login</a>
     </div>
-  </nav>
-</body>
-
-</html>
+  </div>
+</nav>

@@ -1,6 +1,37 @@
-<h1>Products</h1>
+<!-- <h1>Products</h1>
 <ul>
   <li *ngFor="let item of products | async">
     <p>{{ item.color }} ({{ item.price }})</p>
   </li>
-</ul>
+</ul> -->
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="cards-container" >
+    <div class="card" *ngFor="let product of products">
+      <a class="img-container" [routerLink]="['product/detail']" [ngStyle]="{ 'background-image': 'url(' + product.image + ')'}">
+      </a>
+      <div class="info">
+        <h3>{{product.price}}€</h3>
+        <p>Talla: {{product.size}}</p>
+        <p>{{product.color | uppercase }}</p>
+        <h6>Descripción:</h6>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quo exercitationem illo quae optio sunt facilis iusto blanditiis nam veritatis dignissimos vel ducimus animi, dicta sapiente voluptates molestias a totam.</p>
+      </div>
+    </div>
+  </div>
+
+  
+<!--EZE:    -->
+<!-- 
+<div class="cards-container" >
+	<div class="card" *ngFor="let product of products | async">
+		<a class="img-container" [routerLink]="['product/detail']"style="background-image: url('https://www-s.mlo.me/upen/v/tb2016/tb201611/tb20161130/dcacb32a-1ab0-4fb2-8edf-c2ded6b662f9.JPG')">
+    </a>
+		<div class="info">
+			<h3>{{product.price}}€</h3>
+      <p>{{product.color | uppercase }}</p>
+      <h6>Descripción:</h6>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quo exercitationem illo quae optio sunt facilis iusto blanditiis nam veritatis dignissimos vel ducimus animi, dicta sapiente voluptates molestias a totam.</p>
+		</div>
+	</div>
+</div> -->

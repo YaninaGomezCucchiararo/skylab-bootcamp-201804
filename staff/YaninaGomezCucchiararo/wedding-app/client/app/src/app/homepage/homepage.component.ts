@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { Product } from './../models/product'
+
 
 //Service:
 import { ProductsService } from '../services/products.service';
@@ -13,29 +15,29 @@ import { Subscription, Observable } from 'rxjs';
 	styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
- // public searchInput: FormControl;
-  
- //EZE:
-  //products: Observable<Product[]>;
+
   products: Product[] = [];
   loading: boolean;
 
-  constructor( private productsService: ProductsService ) { 
+  constructor( 
+    private productsService: ProductsService,
+    private router : Router
+  ) { 
 
     this.loading = true;
 
     this.productsService.getProducts()
       .subscribe( (data: any) => {
-        console.log(data.data);
+        // console.log(data.data);
         this.products = data.data;
         this.loading = false;
         
       })
   }
 
+  
+
 	ngOnInit() {
-    //EZE:
-    // this.products = this.productsService.getProducts();
     
   }
 
@@ -66,7 +68,7 @@ export class HomepageComponent implements OnInit {
 // }
 
 
-//......................codigo eze...................
+//......................codigo ...................
 
   // public  searchInput: FormControl;
   // public vestidos: any[] = [];

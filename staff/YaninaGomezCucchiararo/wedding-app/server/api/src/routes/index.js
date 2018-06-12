@@ -116,11 +116,11 @@ router.get('/products', (req, res) =>{
         })
 })
 
-router.get('/users/:userId/products/:productId', [jwtValidator, jsonBodyParser], (req, res) => {
+router.get('/products/:productId', (req, res) => {
     
-    const { params: { userId, productId } } = req
+    const { params: { productId } } = req
     
-    logic.productInfo(userId, productId)
+    logic.productInfo(productId)
         .then((product) => {
             res.status(200)
             res.json({ status: 'OK', data: product })

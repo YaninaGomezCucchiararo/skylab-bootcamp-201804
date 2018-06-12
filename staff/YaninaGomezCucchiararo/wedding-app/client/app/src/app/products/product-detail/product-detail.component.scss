@@ -1,0 +1,16 @@
+.grid-container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "left-section right-section";
+  }
+  
+  .left {
+    grid-area: left-section;
+  }
+  
+  .right {
+    grid-area: right-section;
+  }
+  

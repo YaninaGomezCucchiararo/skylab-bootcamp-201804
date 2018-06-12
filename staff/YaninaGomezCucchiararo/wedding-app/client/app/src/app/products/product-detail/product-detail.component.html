@@ -1,6 +1,78 @@
-<div class="row">
-  
-  <img src="https://www-s.mlo.me/upen/v/tb2016/tb201611/tb20161130/dcacb32a-1ab0-4fb2-8edf-c2ded6b662f9.JPG" alt="vestido">
-   <div class="col">Lorem ipsum...</div>
-  <div class="col">col</div>
-</div>
+
+  <div class="grid-container m-5">
+      <div class="left">
+        
+          <img [src]="product.image" class="img-fluid" alt="vestido">
+       
+      </div>
+
+      <div class="right align-items-center" >
+
+          <h4>Información vestido...</h4>
+          
+          <h4>{{product.price}}€</h4>
+          <p>Talla: {{product.size}}</p>
+          <h6>Descripción:</h6>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque repudiandae ratione tenetur nihil quos minima placeat nam, nisi in consectetur impedit delectus cumque dolore corporis nulla ducimus, enim voluptatum vel!</p>
+          <br>
+
+        <form id="contact-form" method="post" action="contact.php" role="form">
+
+            <div class="messages"></div>
+        
+            <div class="controls">
+        
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_name">Nombre *</label>
+                            <input id="form_name" type="text" name="name" class="form-control" placeholder="nombre">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_lastname">Apellido</label>
+                            <input id="form_lastname" type="text" name="apellido" class="form-control" placeholder="apellido" >
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_email">Email *</label>
+                            <input id="form_email" type="email" name="email" class="form-control" placeholder="email" required="required" data-error="Valid email is required.">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_phone">Teléfono</label>
+                            <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="teléfono">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="form_message">Mensaje *</label>
+                            <textarea id="form_message" name="message" class="form-control"  rows="4"></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-success btn-send" value="Enviar mensaje al vendedor">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-muted"><strong>*</strong> Estos campos son requeridos.</p>
+                    </div>
+                </div>
+            </div>
+        
+        </form>
+      </div>
+  </div>

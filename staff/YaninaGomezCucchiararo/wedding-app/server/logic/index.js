@@ -230,14 +230,14 @@ const logic = {
       })
   },
 
-  productInfo (userId, productId) {
+  productInfo (productId) {
     return Promise.resolve()
       .then(() => {
-        if ( userId === undefined ) throw Error ('user is not valid')
+        // if ( userId === undefined ) throw Error ('user is not valid')
 
-        if (typeof userId !== 'string') throw Error('user id is not a string')
+        // if (typeof userId !== 'string') throw Error('user id is not a string')
 
-        if (!(userId = userId.trim()).length) throw Error('user id is empty or blank')
+        // if (!(userId = userId.trim()).length) throw Error('user id is empty or blank')
 
         if (typeof productId !== 'string') throw Error('product id is not a string')
 

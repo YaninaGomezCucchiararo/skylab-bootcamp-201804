@@ -9,6 +9,8 @@ import { map, tap, switchMap, filter } from 'rxjs/operators';
 })
 export class ProductsService {
 
+  
+
   constructor(
     private http: HttpClient
   ) { }
@@ -17,14 +19,8 @@ export class ProductsService {
     return this.http.get('http://localhost:5000/api/products')
   }
 
-  
-//EZE:
-// getProducts(): Observable<Product[]> {
-//   return this.http.get('http://localhost:5000/api/products')
-//     .pipe(
-//       switchMap((res: any) => of(res.data)),
-//       tap(res => console.log('Response:', res)),
-//     );
-// }
+  getProduct(id) {
 
+    return this.http.get(`http://localhost:5000/api/products/${id}`)
+  }
 }

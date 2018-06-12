@@ -1,0 +1,25 @@
+<div class="card">
+    <a class="img-container" (click)="goToProduct()" [ngStyle]="{ 'background-image': 'url(' + product.image + ')'}">
+    </a>
+    <div class="info">
+      <h3>{{product.price}}€</h3>
+      <p>Talla: {{product.size}}</p>
+      <p>{{product.color | uppercase }}</p>
+      <h6>Descripción:</h6>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quo exercitationem illo quae optio sunt facilis iusto
+        blanditiis nam veritatis dignissimos vel ducimus animi, dicta sapiente voluptates molestias a totam.</p>
+    </div>
+  </div>
+
+  <!-- <div (click)="detailProduct( product )" class="card" *ngFor="let product of products">
+      <a class="img-container" [ngStyle]="{ 'background-image': 'url(' + product.image + ')'}">
+      </a>
+      <div class="info">
+        <h3>{{product.price}}€</h3>
+        <p>Talla: {{product.size}}</p>
+        <p>{{product.color | uppercase }}</p>
+        <h6>Descripción:</h6>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quo exercitationem illo quae optio sunt facilis iusto
+          blanditiis nam veritatis dignissimos vel ducimus animi, dicta sapiente voluptates molestias a totam.</p>
+      </div>
+    </div> -->

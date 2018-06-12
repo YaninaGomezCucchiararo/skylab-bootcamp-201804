@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { filter } from 'rxjs/operators'
-import { Subscription, Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 
 //Model:
 import { Product } from './../../models/product'
@@ -11,20 +10,33 @@ import { Product } from './../../models/product'
 import { ProductsService } from '../../services/products.service';
 
 
+
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  styleUrls: ['./product-detail.component.scss']
 })
+
 export class ProductDetailComponent implements OnInit {
   
-  //public searchInput: FormControl;
+  product: Product[] = [];
 
-  products: Observable<Product[]>
+  constructor( 
+    private activatedRoute: ActivatedRoute,
+    private productService : ProductsService) 
+    
+  { 
+    this.activatedRoute.params.subscribe( params => {
+      // console.log(params['id']);
+      const product = params['id'];
+      this.productService.getProduct(product)
+        .subscribe((product : any) => {
+          console.log (product)
+          this.product = product.data;
 
-  constructor(
-    private productsService: ProductsService
-  ) { }
+        })
+    })
+  }
 
   ngOnInit() {
     

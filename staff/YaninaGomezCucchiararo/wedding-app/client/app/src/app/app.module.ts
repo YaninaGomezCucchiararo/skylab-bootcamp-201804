@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing-.module';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingComponent } from './shared/loading/loading.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
 
 
 
@@ -31,6 +32,7 @@ import { LoadingComponent } from './shared/loading/loading.component';
     HeaderComponent,
     FooterComponent,
     LoadingComponent,
+    ProductCardComponent,
     
   ],
   imports: [

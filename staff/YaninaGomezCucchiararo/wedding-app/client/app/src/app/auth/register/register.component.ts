@@ -1,18 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-
-
+import { Component} from '@angular/core';
+import { FormControl, FormGroup, Validators, NgForm} from '@angular/forms';
+import { User } from './../../models/user.model';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  constructor() { }
-
-  ngOnInit() {
+  user: User = {
+    username: '',
+    email: '',
+    password: '',
+    location: ''
   }
 
+  constructor ( private authService: AuthService,
+                private router: Router ) { }
+
+   handlerSubmit() {
+
+    console.log(this.user);
+
+    this.authService.register( this.user )
+      .subscribe( data => {
+        this.router.navigate(['/login'])
+      },
+      error => console.error(error))
+    }
 
 }

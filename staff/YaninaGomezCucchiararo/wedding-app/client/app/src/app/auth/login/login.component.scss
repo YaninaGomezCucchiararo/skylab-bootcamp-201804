@@ -1,0 +1,15 @@
+.grid-container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "left right";
+  }
+  
+  .left {
+    grid-area: left;
+  }
+  
+  .right {
+    grid-area: right;
+  }

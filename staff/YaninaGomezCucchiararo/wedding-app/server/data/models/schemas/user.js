@@ -16,7 +16,7 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    location: {
+    location: { 
         type: String  
     },
     products: [{

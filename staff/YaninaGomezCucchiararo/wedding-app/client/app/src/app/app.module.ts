@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 
 //SERVICES:
 import { ProductsService } from './services/products.service';
+import { AuthService } from './services/auth.service';
+
 
 // COMPONENTS:
 import { AppComponent } from './app.component';
@@ -18,6 +20,9 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
+import { ProfileComponent } from './profile/profile.component';
+
+
 
 
 
@@ -33,6 +38,7 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
     FooterComponent,
     LoadingComponent,
     ProductCardComponent,
+    ProfileComponent,
     
   ],
   imports: [
@@ -45,8 +51,9 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
   ],
   providers: [
     HttpClient,
-    ProductsService
-  ], //nuestro axios se guardara aqui
+    ProductsService,
+    AuthService
+  ], 
 
   bootstrap: [AppComponent]
 })

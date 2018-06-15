@@ -27,10 +27,10 @@ export class LoginComponent implements OnInit {
     
     
     this.authService.login( this.params)
-      .subscribe( data => {
+      .subscribe( (data: any) => {
         this.router.navigate([''])
         console.log(data)
-        this.authService.agregarUserData(data)
+        this.authService.agregarUserData(data.data)
       },
       error => console.error(error))
   }

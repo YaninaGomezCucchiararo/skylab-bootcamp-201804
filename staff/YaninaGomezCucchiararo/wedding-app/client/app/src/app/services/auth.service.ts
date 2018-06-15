@@ -11,14 +11,13 @@ export class AuthService {
 
   users: User[] = [];
 
-  userData: any[] = [];
+  userData: any;
 
   userId = localStorage.getItem('id');
 
 
   url: string = "http://localhost:5000/api/users";
   urlAuth: string = "http://localhost:5000/api/auth";
-  urlUser: string = `http://localhost:5000/api/users/${this.userId}`
 
 
   constructor(private http: HttpClient) {
@@ -36,9 +35,10 @@ export class AuthService {
 
   //..............LOCAL STORAGE...........
   actualizarData() {
-    // localStorage.setItem("data", JSON.stringify(this.userData)) 
-    localStorage.setItem("token", this.userData[0].data.token)
-    localStorage.setItem("id", this.userData[0].data.id)
+    localStorage.setItem("token", this.userData.token)
+    
+    this.userId = this.userData.id
+    localStorage.setItem("id", this.userData.id)
   }
 
   cargarData() {
@@ -47,8 +47,8 @@ export class AuthService {
     }
   }
 
-  agregarUserData(data) {
-    this.userData.push(data);
+  agregarUserData(data: any) {
+    this.userData = data;
     this.actualizarData();
   }
   // //........................................
@@ -90,7 +90,7 @@ export class AuthService {
     let body = JSON.stringify(dataUser);
 
 
-    return this.http.patch(this.urlUser, dataUser, { headers: this.headers() })
+    return this.http.patch(`http://localhost:5000/api/users/${this.userId}`, dataUser, { headers: this.headers() })
       .pipe(map(res => {
         console.log(res)
         return res

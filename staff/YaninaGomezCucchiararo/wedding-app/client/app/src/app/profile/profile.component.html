@@ -1,3 +1,83 @@
-<p>
-  profile works!
-</p>
+<div class="grid-container m-5">
+
+  <div class="profileInfo">
+    <div class="InfoUser">
+      <h6>INFORMACIÓN USUARIO</h6>
+    </div>
+    <div class="productsUser">
+      <h6>PRODUCTOS</h6>
+    </div>
+  </div>
+
+  <div class="updateUser">
+    <h6>ACTUALIZAR DATOS</h6>
+      <div class="grid-container m-5">
+          <div>
+            <form (ngSubmit)="handlerSubmit()" #forma="ngForm">
+        
+              <div class="form-group">
+                <label for="pwd">Nombre:</label>
+                <input [(ngModel)]="dataUser.username"
+                        name="username"
+                        type="text" 
+                        class="form-control"
+                        placeholder="Nombre">
+              </div>
+        
+              <div class="form-group">
+                <label for="pwd">Ciudad:</label>
+                <input [(ngModel)]="dataUser.location"
+                        name="location"
+                        type="text" 
+                        class="form-control"
+                        placeholder="Ciudad" >
+              </div> 
+        
+              <div class="form-group">
+                <label for="email">Email actual:</label>
+                <input [(ngModel)]="dataUser.email"
+                        name="email"
+                        type="email" 
+                        class="form-control"
+                        placeholder="Email actual" >
+              </div>
+
+              <div class="form-group">
+                  <label for="email">Nuevo email:</label>
+                  <input [(ngModel)]="dataUser.newEmail"
+                          name="newEmail"
+                          type="email" 
+                          class="form-control"
+                          placeholder="Nuevo email" >
+                </div>
+        
+              <div class="form-group">
+                <label for="pwd">Contraseña actual:</label>
+                <input [(ngModel)]="dataUser.password"
+                        name="password"
+                        type="password" 
+                        class="form-control" 
+                        placeholder="Contraseña actual" >
+              </div>
+
+              <div class="form-group">
+                  <label for="pwd">Nueva contraseña:</label>
+                  <input [(ngModel)]="dataUser.newPassword"
+                          name="newPassword"
+                          type="password" 
+                          class="form-control" 
+                          placeholder="Nueva contraseña" >
+                </div>
+        
+              <button   [disabled]="!forma.valid"
+                        type="submit" 
+                        class="btn btn-primary">
+                        Enviar
+              </button>
+        
+            </form>
+          </div>
+        </div>
+  </div>
+
+</div>

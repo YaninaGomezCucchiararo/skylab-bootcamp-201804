@@ -22,11 +22,15 @@ export class LoginComponent implements OnInit {
 
   handlerSubmit() {
 
-    console.log(this.params);
+    console.log(`el primero:` , this.params);
 
-    this.authService.login( this.params )
+    
+    
+    this.authService.login( this.params)
       .subscribe( data => {
         this.router.navigate([''])
+        console.log(data)
+        this.authService.agregarUserData(data)
       },
       error => console.error(error))
   }

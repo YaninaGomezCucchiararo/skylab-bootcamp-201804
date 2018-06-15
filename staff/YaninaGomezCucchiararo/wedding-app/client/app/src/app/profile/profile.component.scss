@@ -1,0 +1,28 @@
+.grid-container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "profileInfo" "updateUser";
+  }
+  
+  .profileInfo {
+    display: grid;
+    grid-area: profileInfo;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "InfoUser productsUser";
+  }
+  
+  .InfoUser {
+    grid-area: InfoUser;
+  }
+  
+  .productsUser {
+    grid-area: productsUser;
+  }
+  
+  .updateUser {
+    grid-area: updateUser;
+  }
+  

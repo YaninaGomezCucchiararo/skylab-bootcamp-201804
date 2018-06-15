@@ -25,11 +25,10 @@ export class RegisterComponent {
 
     console.log(this.user);
 
-    this.authService.register( this.user )
+   this.authService.register( this.user )
       .subscribe( data => {
         this.router.navigate(['/login'])
       },
       error => console.error(error))
     }
-
 }

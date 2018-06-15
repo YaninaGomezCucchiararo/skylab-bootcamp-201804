@@ -14,43 +14,46 @@ export class AuthService {
   userData: any[] = [];
 
   userId = localStorage.getItem('id');
-  
+
 
   url: string = "http://localhost:5000/api/users";
   urlAuth: string = "http://localhost:5000/api/auth";
   urlUser: string = `http://localhost:5000/api/users/${this.userId}`
 
-  headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('token')}`
-  });
-
 
   constructor(private http: HttpClient) {
-      console.log(this.userId)
-      this.cargarData()
-      
+    console.log(this.userId)
+    this.cargarData()
+
   }
+
+  headers() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    })
+  }
+
   //..............LOCAL STORAGE...........
-    actualizarData () {
-      // localStorage.setItem("data", JSON.stringify(this.userData)) 
-      localStorage.setItem("token", this.userData[0].data.token)
-      localStorage.setItem("id", this.userData[0].data.id)  
-    }
+  actualizarData() {
+    // localStorage.setItem("data", JSON.stringify(this.userData)) 
+    localStorage.setItem("token", this.userData[0].data.token)
+    localStorage.setItem("id", this.userData[0].data.id)
+  }
 
-    cargarData () {
-      if(localStorage.getItem("data")) {
-        this.users = JSON.parse(localStorage.getItem("data")) 
-      }
+  cargarData() {
+    if (localStorage.getItem("data")) {
+      this.users = JSON.parse(localStorage.getItem("data"))
     }
+  }
 
-    agregarUserData ( data ){
-      this.userData.push(data);
-      this.actualizarData();
-    }
+  agregarUserData(data) {
+    this.userData.push(data);
+    this.actualizarData();
+  }
   // //........................................
-  
-  
+
+
 
   register(user: User) {
 
@@ -85,9 +88,9 @@ export class AuthService {
     console.log(localStorage.getItem('token'));
 
     let body = JSON.stringify(dataUser);
-  
 
-    return this.http.patch(this.urlUser, dataUser, { headers: this.headers })
+
+    return this.http.patch(this.urlUser, dataUser, { headers: this.headers() })
       .pipe(map(res => {
         console.log(res)
         return res

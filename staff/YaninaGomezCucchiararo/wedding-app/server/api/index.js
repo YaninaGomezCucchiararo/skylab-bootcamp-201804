@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const {mongoose} = require('data')
 
-const router = require('./src/routes')
+const router = require('./routes')
 const cors = require('cors')
 
 

@@ -404,7 +404,7 @@ describe('logic wedding-app', () => {
 
         it('should succed on correct data', () => {
            Product.create(product)
-            .then({_id} => {
+            .then(({_id}) => {
                 console.log(res)
             })
     })

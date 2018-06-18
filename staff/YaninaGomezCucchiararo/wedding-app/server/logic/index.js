@@ -1,19 +1,27 @@
-'use strict';
+'use strict'
 
 const { models: { User, Product } } = require('data')
 
+const cloudinary = require('cloudinary')
+
+cloudinary.config({
+  cloud_name: 'drnwaftur',
+  api_key: '946871761846266',
+  api_secret:'BtBn8SZYFg_5z6Q5phLsCIYMdxg'
+});
+
 const logic = {
   /**
-    * 
-    * @param {string} username 
+    *
+    * @param {string} username
     * @param {string} location
-    * @param {string} email 
-    * @param {string} password 
-    * 
+    * @param {string} email
+    * @param {string} password
+    *
     * @returns {Promise<boolean>}
     */
 
-  registerUser(username, location, email, password) {
+  registerUser (username, location, email, password) {
     return Promise.resolve()
       .then(() => {
         if (typeof username !== 'string') throw Error('user username is not a string')
@@ -43,13 +51,13 @@ const logic = {
   },
 
   /**
- * 
- * @param {string} email 
- * @param {string} password 
- * 
+ *
+ * @param {string} email
+ * @param {string} password
+ *
  * @returns {Promise<string>}
  */
-  authenticateUser(email, password) {
+  authenticateUser (email, password) {
     return Promise.resolve()
       .then(() => {
         if (typeof email !== 'string') throw Error('user email is not a string')
@@ -70,13 +78,12 @@ const logic = {
   },
 
   /**
-     * 
+     *
      * @param {string} id
-     * 
-     * @returns {Promise<User>} 
+     *
+     * @returns {Promise<User>}
      */
-  retrieveUser(id) {
-
+  retrieveUser (id) {
     return Promise.resolve()
       .then(() => {
         if (typeof id !== 'string') throw Error('user id is not a string')
@@ -93,18 +100,18 @@ const logic = {
   },
 
   /**
-   * 
-   * @param {string} id 
-   * @param {string} name 
-   * @param {string} surname 
-   * @param {string} email 
-   * @param {string} password 
-   * @param {string} newEmail 
-   * @param {string} newPassword 
-   * 
+   *
+   * @param {string} id
+   * @param {string} name
+   * @param {string} surname
+   * @param {string} email
+   * @param {string} password
+   * @param {string} newEmail
+   * @param {string} newPassword
+   *
    * @returns {Promise<boolean>}
    */
-  updateUser(id, username, location, email, password, newEmail, newPassword) {
+  updateUser (id, username, location, email, password, newEmail, newPassword) {
     return Promise.resolve()
       .then(() => {
         if (typeof id !== 'string') throw Error('user id is not a string')
@@ -147,8 +154,8 @@ const logic = {
       .then(user => {
         user.username = username
         user.location = location
-        user.email = newEmail ? newEmail : email
-        user.password = newPassword ? newPassword : password
+        user.email = newEmail || email
+        user.password = newPassword || password
 
         return user.save()
       })
@@ -156,14 +163,14 @@ const logic = {
   },
 
   /**
-     * 
-     * @param {string} id 
-     * @param {string} email 
-     * @param {string} password 
-     * 
+     *
+     * @param {string} id
+     * @param {string} email
+     * @param {string} password
+     *
      * @returns {Promise<boolean>}
      */
-  unregisterUser(id, email, password) {
+  unregisterUser (id, email, password) {
     return Promise.resolve()
       .then(() => {
         if (typeof id !== 'string') throw Error('user id is not a string')
@@ -190,7 +197,7 @@ const logic = {
       .then(() => true)
   },
 
-  addProductToUser(ownerId, image, price, size, color) {
+  addProductToUser (ownerId, image = '', price, size, color, description) {
     return Promise.resolve()
       .then(() => {
         if (typeof ownerId !== 'string') throw Error('owner id is not a string')
@@ -203,11 +210,13 @@ const logic = {
 
         if (typeof color !== 'string') throw Error('color is not a string')
 
+        if (typeof description !== 'string') throw Error('description is not a string')
+
         return User.findById(ownerId)
           .then(user => {
-            if (!user) throw Error(`ownerId not exists`) // manejarlo dsd cliente si no está logged
+            if (!user) throw Error(`ownerId not exists`) // manejarlo dsd cliente si no está logueado
 
-            return Product.create({ owner: ownerId, image, price, size, color })
+						return Product.create({ owner: ownerId, image, price, size, color, description})
               .then(({ _doc: { _id } }) => {
                 user.products.push(_id)
 
@@ -216,13 +225,11 @@ const logic = {
               })
           })
       })
-
   },
-  
-  listProducts() {
+
+  listProducts () {
     return Promise.resolve()
       .then(() => {
-
         return Product.find({})
           .then(products => {
             return products
@@ -243,13 +250,49 @@ const logic = {
 
         if (!(productId = productId.trim()).length) throw Error('product id is empty or blank')
 
-        return Product.findById({_id:productId}).select({ image: 1, price: 1, size: 1, color: 1})
+        return Product.findById({ _id: productId }).select({ image: 1, price: 1, size: 1, color: 1 })
       })
       .then(product => {
         if (!product) throw Error(`no product found with id ${productId}`)
 
         return product
       })
+  },
+
+  retrieveUserProducts (userId) {
+    return Promise.resolve()
+      .then(() => {
+       
+        if (userId === undefined) throw Error('user is not valid')
+
+        if (typeof userId !== 'string') throw Error('user id is not a string')
+
+        if (!(userId = userId.trim()).length) throw Error('user id is empty or blank')
+
+        return Product.find({ owner: userId })
+      })
+      .then((userProducts) => {
+        
+        if (!userProducts) throw Error(`no user found with id ${userId}`)
+
+        return userProducts
+      })
+  },
+
+  deleteProduct ( userId, productId ) {
+    return Promise.resolve()
+      .then(() => {
+        console.log(productId)
+        if (typeof productId !== 'string') throw Error('product id is not a string')
+    
+        if (!(productId = productId.trim()).length) throw Error('product id is empty or blank')
+        
+        return Product.findByIdAndRemove({ _id : productId })
+      })
+      .then(() => {
+        return true
+      })
   }
 }
+
 module.exports = logic

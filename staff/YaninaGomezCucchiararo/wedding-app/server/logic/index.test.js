@@ -13,7 +13,7 @@ const { env: { DB_URL } } = process
 describe('logic wedding-app', () => {
     const userData = { username: 'yanina', location: 'Barcelona', email: 'y@mail.com', password: '123' }
     const otherUserData = { username: 'vanesa', location: 'Madrid', email: 'vanesa@mail.com', password: '456' }
-    const productData = { image: 'image', price: 200, size: 42, color: 'white' }
+    const productData = { image: 'image', price: 200, size: 42, color: 'white', description: 'vestido corte princesa' }
 
     const dummyUserId = '123456781234567812345678'
     const dummyProductId = '123456781234567812345678'

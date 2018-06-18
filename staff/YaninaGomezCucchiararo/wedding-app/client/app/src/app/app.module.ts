@@ -7,6 +7,9 @@ import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { ProductsService } from './services/products.service';
 import { AuthService } from './services/auth.service';
 
+//DIRECTIVES:
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
+
 
 // COMPONENTS:
 import { AppComponent } from './app.component';
@@ -21,8 +24,9 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { ProfileComponent } from './profile/profile.component';
-
-
+import { MyProductsComponent } from './products/my-products/my-products.component';
+import { FilterComponent } from './shared/filter/filter.component';
+import { LandingComponent } from './landing/landing.component';
 
 
 
@@ -39,6 +43,9 @@ import { ProfileComponent } from './profile/profile.component';
     LoadingComponent,
     ProductCardComponent,
     ProfileComponent,
+    MyProductsComponent,
+    FilterComponent,
+    LandingComponent
     
   ],
   imports: [
@@ -46,7 +53,8 @@ import { ProfileComponent } from './profile/profile.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    
 
   ],
   providers: [

@@ -1,14 +1,54 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Més que nuvies...</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+<!-- TERCER DISEÑO.................... -->
+<header class="header">
+  <div class="header__text-box">
+    <h1 class="heading-primary">
+      <span class="heading-primary--main">Novias</span>
+      <span class="heading-primary--sub">cumple tu sueño</span>
+    </h1>
+    <nav class="navigation">
+      <a href="" class="navigation__item">Home</a>
+      <a [routerLink]="['profile']" class="navigation__item">Perfil</a>
+      <a [routerLink]="['my-products']" class="navigation__item">Mis productos</a>
+      <a [routerLink]="['add-product']" class="navigation__item">Añadir producto</a>
+      <a href="" class="navigation__item">Logout</a>
+    </nav>
+  </div>
+</header>
+
+
+
+
+
+<!-- SEGUNDO DISEÑO.................. -->
+<!-- <header class="header">
+
+  <div class="header__text-box">
+    <h1 class="heading-primary">
+      <span class="heading-primary--main">Novias</span>
+      <span class="heading-primary--sub">cumple tu sueño</span>
+    </h1>
+    <a href="#" class="btn btn--white">Descubre los vestidos</a>
+  </div>
+</header> -->
+
+
+<!-- PRIMER DISEÑO.................... -->
+<!-- <nav *ngIf="showHeader" class="navbar navbar-expand-lg navbar-light bg-light">
+  <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Schw%C3%A4bische_Bank_Logo.svg/2000px-Schw%C3%A4bische_Bank_Logo.svg.png">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" [routerLink]="['']">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" [routerLink]="['']">Home
+        <span class="sr-only">(current)</span>
+      </a>
       <a class="nav-item nav-link" [routerLink]="['register']">Regístrate</a>
       <a class="nav-item nav-link" [routerLink]="['login']">Login</a>
-      <a class="nav-item nav-link" [routerLink]="['profile']">Profile</a>
+      <a class="nav-item nav-link" [routerLink]="['profile']">Perfil</a>
+      <a class="nav-item nav-link" [routerLink]="['my-products']">Mis productos</a>
+      <a class="nav-item nav-link" [routerLink]="['add-product']">Añadir producto</a>
     </div>
   </div>
-</nav>
+</nav> -->

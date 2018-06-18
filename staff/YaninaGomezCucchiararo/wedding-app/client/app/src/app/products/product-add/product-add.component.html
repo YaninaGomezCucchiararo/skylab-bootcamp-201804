@@ -1,3 +1,65 @@
-<p>
-  product-add works!
-</p>
+
+<!-- <app-loading *ngIf="loading"></app-loading> -->
+
+<div class="grid-container m-5" >
+
+  <div class="addProduct">
+    <h6>AÑADIR PRODUCTO</h6>
+      <div class="grid-container m-5">
+          <div>
+            <form (ngSubmit)="handlerSubmit()" #forma="ngForm">
+        
+              <div class="form-group">
+                <label> Precio:</label>
+                <input [(ngModel)]="product.price"
+                        name="username"
+                        type="text" 
+                        class="form-control"
+                        placeholder="Precio">
+              </div>
+        
+              <div class="form-group">
+                <label> Talla:</label>
+                <input [(ngModel)]="product.size"
+                        name="location"
+                        type="text" 
+                        class="form-control"
+                        placeholder="Talla" >
+              </div> 
+        
+              <div class="form-group">
+                <label> Color:</label>
+                <input [(ngModel)]="product.color"
+                        name="email"
+                        type="email" 
+                        class="form-control"
+                        placeholder="Color" >
+              </div>
+
+              <div class="form-group">
+                  <label >Descripción del producto:</label>
+                  <input [(ngModel)]="product.description"
+                          name="newEmail"
+                          type="email" 
+                          class="form-control"
+                          placeholder="Descripción del producto" >
+                </div>
+
+
+              <div class="form-group">
+                <label >Imagen del producto:</label>
+                <input type="file" (change)="onFileSelected($event)">
+              </div>
+
+              <button   [disabled]="!forma.valid"
+                        type="submit" 
+                        class="btn btn-primary">
+                        Subir producto
+              </button>
+        
+            </form>
+          </div>
+        </div>
+  </div>
+
+</div>

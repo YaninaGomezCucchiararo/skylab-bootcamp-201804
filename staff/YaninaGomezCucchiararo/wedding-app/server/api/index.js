@@ -18,6 +18,8 @@ mongoose.connect(DB_URL)
    app.use(cors())
    app.use('/api', router)
 
+   app.use('/api/uploads', express.static('uploads/'))
+
    app.listen(port, () => console.log(`server running in port ${port}`))
 
    process.on('SIGINT', () => {

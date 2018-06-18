@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { throwError, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  public ifLogged = new Subject();
 
   users: User[] = [];
 
@@ -77,18 +79,19 @@ export class AuthService {
     });
 
     return this.http.post(this.urlAuth, params)
-      .pipe(map(res => {
+      .pipe(
+        tap(() => { this.ifLogged.next(true)}),
+        map(res => {
         console.log(res)
         return res
       }))
   }
 
-  updateUser(dataUser) {
+  updateUser( dataUser ) {
 
     console.log(localStorage.getItem('token'));
 
     let body = JSON.stringify(dataUser);
-
 
     return this.http.patch(`http://localhost:5000/api/users/${this.userId}`, dataUser, { headers: this.headers() })
       .pipe(map(res => {
@@ -96,6 +99,33 @@ export class AuthService {
         return res
       }))
 
+  }
+
+  retrieveUserProducts() {
+    
+    return this.http.get(`http://localhost:5000/api/users/${this.userId}/products`,{ headers: this.headers() })
+      .pipe(map ( res => {
+        console.log(res)
+        return res
+      }))
+  }
+
+
+  addProduct (params) {
+    
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    })
+
+    let fd = new FormData();
+
+    fd.append('image', params.image, params.image.name);
+    fd.append('price', params.price);
+    fd.append('size', params.size);
+    fd.append('color', params.color);
+    fd.append('description', params.description);
+
+    return this.http.post(`http://localhost:5000/api/users/${this.userId}/products`, fd, { headers: headers })
   }
 
 }

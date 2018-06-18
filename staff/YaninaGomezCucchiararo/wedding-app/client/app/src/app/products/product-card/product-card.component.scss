@@ -1,3 +1,4 @@
+//PRIMER DISEÑO..............
 .card {
     height: 500px;
     width: 300px;
@@ -7,7 +8,7 @@
     cursor: pointer;
 
     &:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 1.5rem 4rem 0 rgba(0,0,0,.15);
     }
 
     .img-container {
@@ -15,5 +16,40 @@
         height: 70%;
         background-repeat: no-repeat;
         background-size: cover;
+        clip-path: polygon( 0 0, 100% 0, 100% 85%, 0 100%);
+        
+    }
+    
+    .info {
+        background-color: white;
+        text-align: center;
     }
 }
+
+
+
+//.....................................................................
+// .row {
+//     max-width: 114rem;
+//     margin: 0 auto;
+
+// }
+// .card {
+
+//     perspective: 150rem;
+//     -moz-perspective: 150rem;
+
+//     &__side {
+//         background-color: rgb(153, 0, 255);
+//         color: white;
+//         font-size: 2rem;
+//         height: 50rem;
+//         transition: all .8s;
+//     }
+
+
+//     &:hover &__side {
+//         transform: rotateY(180deg);
+//     }
+
+// }

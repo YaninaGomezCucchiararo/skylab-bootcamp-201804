@@ -1,34 +1,41 @@
-<div class="grid-container m-5">
-    <div class="left">
-      <img class="img-fluid" src="https://www.luciasecasa.com/wp-content/uploads/2016/05/rosas.jpg" alt="flowers">
+<header class="header">
+
+  <div class="header__text-box">
+    <h1 class="heading-primary">
+      <span class="heading-primary--main">Novias</span>
+      <span class="heading-primary--sub">cumple tu sueño</span>
+    </h1>
+  </div>
+</header>
+
+<main>
+  <section class="section-about">
+    <div class="u-center-text">
+      <h2 class="heading-secondary">
+        Login
+      </h2>
     </div>
-    <div class="right" >
+  </section>
+
+  <div class="grid-container ">
+    <div class="right">
       <form (ngSubmit)="handlerSubmit()" #forma="ngForm">
 
         <div class="form-group">
           <label for="email">Email:</label>
-          <input [(ngModel)]="params.email"
-                  name="email"
-                  type="email" 
-                  class="form-control"
-                  placeholder="email" >
+          <input [(ngModel)]="params.email" name="email" type="email" class="form-control" placeholder="email">
         </div>
-  
+
         <div class="form-group">
           <label for="pwd">Password:</label>
-          <input [(ngModel)]="params.password"
-                  name="password"
-                  type="password" 
-                  class="form-control" 
-                  placeholder="password" >
+          <input [(ngModel)]="params.password" name="password" type="password" class="form-control" placeholder="password">
         </div>
-  
-        <button   [disabled]="!forma.valid"
-                  type="submit" 
-                  class="btn btn-primary">
-                  Enviar
+
+        <button [disabled]="!forma.valid" type="submit" class="btn-send">
+          Enviar
         </button>
-        
-      </form> 
+
+      </form>
     </div>
   </div>
+</main>

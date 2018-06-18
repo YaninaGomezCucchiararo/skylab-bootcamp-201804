@@ -19,7 +19,8 @@ describe(`models (wedding-app)`, () => {
         image: 'image',
         price: 50,
         size: 38,
-        color: 'blanco'
+        color: 'blanco',
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quo exercitationem illo quae optio sunt facilis iusto blanditiis nam veritatis dignissimos vel ducimus animi, dicta sapiente voluptates molestias a totam."
     }
 
     before(() => mongoose.connect(DB_URL)) //nos conectamos a la base de datos

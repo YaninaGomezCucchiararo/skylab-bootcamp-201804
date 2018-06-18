@@ -18,6 +18,7 @@
     "lodash": "^4.17.10"
   },
   "dependencies": {
+    "cloudinary": "^1.11.0",
     "data": "file:../data"
   }
 }

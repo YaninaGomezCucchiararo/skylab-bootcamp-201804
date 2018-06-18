@@ -1,8 +1,31 @@
-<app-loading *ngIf="loading"></app-loading>
+<!--PRIMER DISEÑO-->
 
-<div class="cards-container">
 
-  <app-product-card [product]="product" [productId]="product._id" *ngFor="let product of products"></app-product-card>
+ <app-loading *ngIf="loading"></app-loading>
 
-</div>
+ <div class="container" *ngIf="!loading ">
+   <app-filter (onChange)="onFilterChange($event)"></app-filter>
+   <div class="cards-container">
+     <app-product-card [product]="product" [productId]="product._id" *ngFor="let product of productsFiltered"></app-product-card>
+   </div>
+ </div>
 
+
+
+<!-- SEGUNDO DISEÑO........................... -->
+<!-- <main>
+  <section class="section-about">
+    <div class="u-center-text">
+      <h2 class="heading-secondary">
+        Publica o encuentra tu vestido ideal para ese día tan importante!
+      </h2>
+    </div>
+  </section>
+
+  <div class="container" *ngIf="!loading ">
+      <app-filter (onChange)="onFilterChange($event)"></app-filter>
+      <div class="cards-container">
+        <app-product-card [product]="product" [productId]="product._id" *ngFor="let product of productsFiltered"></app-product-card>
+      </div>
+    </div>
+</main> -->

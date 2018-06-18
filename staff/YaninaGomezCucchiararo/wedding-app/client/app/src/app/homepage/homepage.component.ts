@@ -3,96 +3,105 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { Product } from './../models/product'
-
-
-//Service:
-import { ProductsService } from '../services/products.service';
 import { Subscription, Observable } from 'rxjs';
+import { ProductsService } from '../services/products.service';
 
 @Component({
 	selector: 'homepage',
 	templateUrl: './homepage.component.html',
 	styleUrls: ['./homepage.component.scss']
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent implements OnInit, OnDestroy {
+	public products: Product[] = [];
+	public productsFiltered: Product[] = [];
+	public loading: boolean = true;
+	private productsSubscription: Subscription = null;
 
-  products: Product[] = [];
-  loading: boolean;
-
-  constructor( 
-    private productsService: ProductsService,
-    private router : Router
-  ) { 
-
-    this.loading = true;
-
-    this.productsService.getProducts()
-      .subscribe( (data: any) => {
-        // console.log(data.data);
-        this.products = data.data;
-        this.loading = false;
-        
-      })
-  }
-
-  
+	constructor(
+		private productsService: ProductsService,
+		private router: Router
+	) { }
 
 	ngOnInit() {
-    
-  }
+		this.productsSubscription = this.productsService.getProducts()
+			.subscribe((data: any) => {
+				this.products = data.data;
+				this.productsFiltered = [...this.products];
+				this.loading = false;
+			})
+	}
+
+	onFilterChange(event: Event) {
+		this.productsFiltered = this.filterProducts(event);
+	}
+
+	ngOnDestroy() {
+		if (this.productsSubscription) {
+			this.productsSubscription.unsubscribe();
+		}
+	}
+
+	filterProducts(filterData: any): Product[] {
+		let productsFiltered = this.products.filter((product: Product) => {
+			let passPrice = (product.price >= filterData.minPrice) && (product.price <= filterData.maxPrice);
+			let passSize = false;
+
+			if (filterData.size) {
+				passSize = filterData.size === product.size;
+			} else {
+				passSize = true;
+			}
+
+			return passSize && passPrice;
+		});
+		
+		return productsFiltered;
+	}
 
 }
 
-// import { Component, OnInit } from '@angular/core';
+
+
+
+// import { Component, OnInit, OnDestroy } from '@angular/core';
 // import { FormControl } from '@angular/forms';
+// import { Router } from '@angular/router';
+// import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators'
+// import { Product } from './../models/product'
+
+
+// //Service:
+// import { ProductsService } from '../services/products.service';
+// import { Subscription, Observable } from 'rxjs';
 
 // @Component({
-//   selector: 'app-header',
-//   templateUrl: './header.component.html',
-//   styleUrls: ['./header.component.scss']
+// 	selector: 'homepage',
+// 	templateUrl: './homepage.component.html',
+// 	styleUrls: ['./homepage.component.scss']
 // })
-// export class HeaderComponent implements OnInit {
-//   public searchInput: FormControl; //creará una propiedad del tipo formcontrol
-//   constructor() { }
+// export class HomepageComponent implements OnInit {
+
+//   products: Product[] = [];
+//   loading: boolean;
+
+//   constructor( 
+//     private productsService: ProductsService,
+//     private router : Router
+//   ) { 
+
+//     this.loading = true;
+
+//     this.productsService.getProducts()
+//       .subscribe( (data: any) => {
+//         console.log(data.data);
+//         this.products = data.data;
+//         this.loading = false;
+        
+//       })
+//   }
 
 //   ngOnInit() {
-//     this.searchInput = new FormControl();
-//     //console.log(this.searchInput);
-//     //Todos los eventEmitter son observables
-//     this.searchInput.valueChanges
-//       .subscribe((value: string) => {
-//         console.log(value);
-//       }) //vamos a recibir un valor, en este caso el del input
+    
 //   }
 
 // }
-
-
-//......................codigo ...................
-
-  // public  searchInput: FormControl;
-  // public vestidos: any[] = [];
-
-// this.products = this._productsService.getProducts();
-    // console.log(this.products);
-
-   
-
-
-    //console.log(this.http)
-		// this.searchInput = new FormControl();
-    // this.searchInput.valueChanges
-    //   .pipe(
-    //     debounceTime(400), //este es para establecer un time en la busqueda "restraso"
-    //     distinctUntilChanged(),
-    //     filter((value: string) => {
-    //       return value.length > 0; //minimo un caracter
-    //     })
-    //   ) //es un metodo q recibe argumentos tantos queramos, cada argumento es un operador de rxjs, se realiza antes de enviarlo al observado
-		// 	.subscribe((value: string) => {
-    //     //console.warn(value);
-    //     this.http.get(`https://api.github.com/search/repositories?q=${value}`)
-    //     .subscribe((data:any) =>{
-    //       this.vestidos = data.items
-    //     })
-		// 	});

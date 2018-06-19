@@ -20,7 +20,7 @@ export class ProductCardComponent implements OnInit {
   ngOnInit() {
     this.serverBaseUrl = environment.serverBaseUrl;
   }
-
+ 
   goToProduct(id) {
     console.log(this.productId)
     this.router.navigate(['product', this.productId])

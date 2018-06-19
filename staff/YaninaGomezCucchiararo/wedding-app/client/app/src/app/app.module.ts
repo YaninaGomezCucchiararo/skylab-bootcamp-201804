@@ -7,10 +7,6 @@ import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { ProductsService } from './services/products.service';
 import { AuthService } from './services/auth.service';
 
-//DIRECTIVES:
-import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
-
-
 // COMPONENTS:
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './auth/register/register.component';

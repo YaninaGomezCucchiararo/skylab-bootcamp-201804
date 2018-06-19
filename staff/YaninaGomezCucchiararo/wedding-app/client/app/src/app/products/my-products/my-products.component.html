@@ -1,13 +1,16 @@
-<div class="card" *ngFor="let product of userProducts">
-    <a class="img-container" [ngStyle]="{ 'background-image': 'url(' + product.image + ')'}">
-    </a>
-    <div class="info">
-      <h3>{{product.price}}€</h3>
-      <p>Talla: {{product.size}}</p>
-      <p>{{product.color | uppercase }}</p>
-      <h6>Descripción:</h6>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quo exercitationem illo quae optio sunt facilis iusto
-        blanditiis nam veritatis dignissimos vel ducimus animi, dicta sapiente voluptates molestias a totam.</p>
-      <button type="button" class="btn btn-danger btn-sm btn-block">Eliminar Producto</button>
-    </div>
-  </div>
+<h3>TUS PRODUCTOS</h3>
+<div class="container">
+    <div class="card" *ngFor="let product of userProducts; let i=index">
+        <a class="img-container" [ngStyle]="{ 'background-image': 'url(' + serverBaseUrl + product.image + ')'}">
+        </a>
+        <div class="info">
+          <h3>{{product.price}}€</h3>
+          <p>Talla: {{product.size}}</p>
+          <p>{{product.color | uppercase }}</p>
+          <h6>Descripción:</h6>
+          <p>{{product.description}}</p>
+          <button (click)="removeProduct(product._id, i)" type="button" class="btn btn-danger btn-sm btn-block">Eliminar Producto</button>
+        </div>
+      </div>
+</div>
+

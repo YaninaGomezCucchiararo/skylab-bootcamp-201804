@@ -27,8 +27,8 @@ export class RegisterComponent {
 
    this.authService.register( this.user )
       .subscribe( data => {
-        this.router.navigate(['/login'])
+        this.router.navigate(['/login']);
       },
-      error => console.error(error))
+      error => console.error(error));
     }
 }

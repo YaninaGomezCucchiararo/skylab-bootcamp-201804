@@ -24,15 +24,13 @@ export class LoginComponent implements OnInit {
 
     console.log(`el primero:` , this.params);
 
-    
-    
     this.authService.login( this.params)
       .subscribe( (data: any) => {
-        this.router.navigate([''])
-        console.log(data)
-        this.authService.agregarUserData(data.data)
+        this.router.navigate(['home']);
+        console.log(data);
+        this.authService.agregarUserData(data.data);
       },
-      error => console.error(error))
+      error => console.error(error));
   }
 
   ngOnInit() {

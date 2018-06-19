@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" [routerLink]="['/login']">
 
     <div class="header__text-box">
       <h1 class="heading-primary">
@@ -30,7 +30,8 @@
                 name="username"
                 type="text" 
                 class="form-control"
-                placeholder="Nombre">
+                placeholder="Nombre"
+                required>
       </div>
 
       <div class="form-group">

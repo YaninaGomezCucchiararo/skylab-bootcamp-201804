@@ -128,5 +128,14 @@ export class AuthService {
     return this.http.post(`http://localhost:5000/api/users/${this.userId}/products`, fd, { headers: headers })
   }
 
+  removeProduct (productId) {
+
+    return this.http.delete(`http://localhost:5000/api/users/${this.userId}/products/${productId}`,{ headers: this.headers() })
+    .pipe(map ( res => {
+      console.log(res)
+      return res
+    }))
+  }
+
 }
 

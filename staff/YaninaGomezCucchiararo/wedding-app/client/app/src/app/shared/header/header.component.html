@@ -1,5 +1,5 @@
 <!-- TERCER DISEÑO.................... -->
-<header class="header">
+<!-- <header class="header">
   <div class="header__text-box">
     <h1 class="heading-primary">
       <span class="heading-primary--main">Novias</span>
@@ -13,7 +13,7 @@
       <a href="" class="navigation__item">Logout</a>
     </nav>
   </div>
-</header>
+</header> -->
 
 
 
@@ -33,22 +33,24 @@
 
 
 <!-- PRIMER DISEÑO.................... -->
-<!-- <nav *ngIf="showHeader" class="navbar navbar-expand-lg navbar-light bg-light">
-  <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Schw%C3%A4bische_Bank_Logo.svg/2000px-Schw%C3%A4bische_Bank_Logo.svg.png">
+<nav *ngIf="showHeader" class="navbar navbar-expand-lg navbar-light bg-light">
+    <h1 class="heading-primary">
+        <span class="heading-primary--main">Novias</span>
+        <span class="heading-primary--sub">cumple tu sueño</span>
+      </h1>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" [routerLink]="['']">Home
+      <a class="nav-item nav-link active" [routerLink]="['home']">Home
         <span class="sr-only">(current)</span>
       </a>
-      <a class="nav-item nav-link" [routerLink]="['register']">Regístrate</a>
-      <a class="nav-item nav-link" [routerLink]="['login']">Login</a>
       <a class="nav-item nav-link" [routerLink]="['profile']">Perfil</a>
       <a class="nav-item nav-link" [routerLink]="['my-products']">Mis productos</a>
       <a class="nav-item nav-link" [routerLink]="['add-product']">Añadir producto</a>
+      <a (click)="logout()" class="nav-item nav-link" [routerLink]="['logout']">Logout</a>
     </div>
   </div>
-</nav> -->
+</nav>

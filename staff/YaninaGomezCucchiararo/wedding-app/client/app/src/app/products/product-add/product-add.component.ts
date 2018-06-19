@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { AuthService } from '../../services/auth.service';
+import { Router, Route } from '@angular/router';
+
 
 
 @Component({
@@ -10,7 +12,6 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ProductAddComponent implements OnInit {
   
-  public loading: boolean = true;
   public product = {
     image: null,
     price:'', 
@@ -19,10 +20,10 @@ export class ProductAddComponent implements OnInit {
     description: ''
   }
 
-  constructor( private authService: AuthService ) { 
+  constructor( private authService: AuthService,
+               private router: Router) { }
 
-    
-  }
+
   handlerSubmit() {
     
     this.authService.addProduct({
@@ -37,6 +38,10 @@ export class ProductAddComponent implements OnInit {
 
   onFileSelected(event) {
     this.product.image = event.target.files[0];
+  }
+
+  goToHome() {
+    this.router.navigate(['home']);
   }
 
   ngOnInit() {

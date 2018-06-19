@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 
+
 //Model:
 import { Product } from './../../models/product'
 
 
 //Service:
 import { ProductsService } from '../../services/products.service';
+import { environment } from '../../../environments/environment';
 
 
 
@@ -19,7 +21,8 @@ import { ProductsService } from '../../services/products.service';
 
 export class ProductDetailComponent implements OnInit {
   
-  product: Product[] = [];
+  public serverBaseUrl = '';
+  public product: Product[] = [];
 
   constructor( 
     private activatedRoute: ActivatedRoute,
@@ -39,7 +42,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.serverBaseUrl = environment.serverBaseUrl;
   }
 
 }

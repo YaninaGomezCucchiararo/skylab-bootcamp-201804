@@ -1,4 +1,5 @@
 <h3>TUS PRODUCTOS</h3>
+<hr/>
 <div class="container">
     <div class="card" *ngFor="let product of userProducts; let i=index">
         <a class="img-container" [ngStyle]="{ 'background-image': 'url(' + serverBaseUrl + product.image + ')'}">
@@ -9,7 +10,7 @@
           <p>{{product.color | uppercase }}</p>
           <h6>Descripción:</h6>
           <p>{{product.description}}</p>
-          <button (click)="removeProduct(product._id, i)" type="button" class="btn btn-danger btn-sm btn-block">Eliminar Producto</button>
+          <button (click)="removeProduct(product._id, i)" type="button" class="btn btn-sm btn-block">ELIMINAR PRODUCTO</button>
         </div>
       </div>
 </div>

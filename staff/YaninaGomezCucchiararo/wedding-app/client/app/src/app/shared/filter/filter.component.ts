@@ -16,7 +16,8 @@ export class FilterComponent implements OnInit {
 	private _filterData: any = {
 		size: 0,
 		minPrice: 0,
-		maxPrice: Infinity
+		maxPrice: Infinity,
+		color: ''
 	}
 
 	constructor() { }
@@ -38,7 +39,7 @@ export class FilterComponent implements OnInit {
 	}
 
 	onColorChange() {
-		this._filterData.color = +this.color;
+		this._filterData.color = this.color;
 		this.onChange.emit(this._filterData);
 	}
 }

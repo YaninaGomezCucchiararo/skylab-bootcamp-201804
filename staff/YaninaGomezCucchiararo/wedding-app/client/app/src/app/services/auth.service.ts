@@ -137,5 +137,14 @@ export class AuthService {
     }))
   }
 
+  retrieveUser () {
+    
+    return this.http.get(`http://localhost:5000/api/users/${this.userId}`,{ headers: this.headers() })
+    .pipe(map ( res => {
+      console.log(res)
+      return res
+    }))
+  }
+
 }
 

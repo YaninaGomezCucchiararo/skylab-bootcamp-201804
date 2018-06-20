@@ -61,7 +61,7 @@ main {
     display: block;
     font-size: 60px;
     font-weight: 400;
-    letter-spacing: 40px;
+    letter-spacing: 30px;
   
     animation-name: moveInLeft;
     animation-duration: 1s;
@@ -77,7 +77,7 @@ main {
     display: block;
     font-size: 20px;
     font-weight: 400;
-    letter-spacing: 15px;
+    letter-spacing: 18px;
     animation-name: moveInRight;
     animation-duration: 1s;
     animation-timing-function: ease-out;
@@ -140,12 +140,12 @@ main {
   
   }
   
-  .btn:hover {
+  .btn-send:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0,0,0,.2)
   }
   
-  .btn.active {
+  .btn-send.active {
     transform: translateY(-1px);
     box-shadow: 0 5px 10px rgba(0,0,0,.2)
   }
@@ -158,11 +158,16 @@ main {
   .btn-send{
     text-transform: uppercase;
     text-decoration: none;
-    padding: 5px 40px;
+    padding: 10px 40px;
     display: inline-block;
     border-radius: 100px;
     transition: all .2s;
     background-color:#eab1c3;
     margin-bottom: 80px;
+    color: white;
+  
+  }
 
+  label {
+    font-weight: bold;
   }

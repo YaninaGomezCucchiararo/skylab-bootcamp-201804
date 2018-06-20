@@ -45,6 +45,7 @@ export class LandingComponent implements OnInit, OnDestroy {
 		let productsFiltered = this.products.filter((product: Product) => {
 			let passPrice = (product.price >= filterData.minPrice) && (product.price <= filterData.maxPrice);
 			let passSize = false;
+			let passColor = false;
 
 			if (filterData.size) {
 				passSize = filterData.size === product.size;
@@ -52,7 +53,13 @@ export class LandingComponent implements OnInit, OnDestroy {
 				passSize = true;
 			}
 
-			return passSize && passPrice;
+			if (filterData.color) {
+				passColor = filterData.color.toLowerCase() === product.color.toLowerCase();
+			}else {
+				passColor = true;
+			}
+
+			return passSize && passPrice && passColor;
 		});
 		
 		return productsFiltered;

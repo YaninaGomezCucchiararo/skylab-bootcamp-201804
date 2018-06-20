@@ -12,7 +12,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  dataUser: any = {
+ public dataUser: any = {
     username:"",
     location:"",
     email:"",
@@ -22,18 +22,28 @@ export class ProfileComponent implements OnInit {
     }
 
 
-  constructor( private authService: AuthService) { }
+  constructor( private authService: AuthService) {
+    this.retrieveUser();
+   }
+
+  retrieveUser() {
+    this.authService.retrieveUser()
+      .subscribe((user:any )=> {
+        this.dataUser.username = user.data.username;
+        this.dataUser.location = user.data.location;
+        this.dataUser.email = user.data.email;
+      });
+  }
 
   handlerSubmit(){
-    console.log(this.dataUser)
-
+    
     this.authService.updateUser(this.dataUser)
       .subscribe(user => {
-        console.log(user)
+        
+        this.retrieveUser();
       })
   }
-  ngOnInit() {
 
-  }
+  ngOnInit() {}
 
 }

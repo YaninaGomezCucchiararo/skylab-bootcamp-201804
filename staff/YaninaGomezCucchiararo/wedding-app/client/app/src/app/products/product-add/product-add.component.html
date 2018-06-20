@@ -1,5 +1,5 @@
-<!-- <app-loading *ngIf="loading"></app-loading> -->
 <h3>AÑADIR PRODUCTO</h3>
+<hr/>
 <div class="grid-container m-5">
 
   <div class="addProduct">
@@ -29,10 +29,25 @@
               <option value="52">52</option>
             </select>
           </div>
-
           <div class="form-group">
-            <label> Color:</label>
-            <input [(ngModel)]="product.color" name="email" type="email" class="form-control" placeholder="Color">
+            <label for="color">Busca por color:</label>
+            <select name="color" class="form-control" [(ngModel)]="product.color">
+              <option selected [value]="''">Todos</option>
+              <option value="blanco">blanco</option>
+              <option value="blanco roto">blanco roto</option>
+              <option value="blanco óptico">blanco óptico</option>
+              <option value="beige">beige</option>
+              <option value="marfil">marfil</option>
+              <option value="crema">crema</option>
+              <option value="lila">lila</option>
+              <option value="rosado">rosa</option>
+              <option value="celeste">celeste</option>
+              <option value="negro">negro</option>
+              <option value="blanco-negro">blanco-negro</option>
+              <option value="plateado">plateado</option>
+              <option value="dorado">dorado</option>
+              <option value="amarillo">amarillo</option>
+            </select>
           </div>
 
           <div class="form-group">
@@ -46,7 +61,7 @@
             <input type="file" (change)="onFileSelected($event)">
           </div>
 
-          <button [disabled]="!forma.valid" type="submit" class="btn btn-primary" (click)="goToHome">
+          <button type="submit" class="btn" (click)="goToHome">
             Subir producto
           </button>
 

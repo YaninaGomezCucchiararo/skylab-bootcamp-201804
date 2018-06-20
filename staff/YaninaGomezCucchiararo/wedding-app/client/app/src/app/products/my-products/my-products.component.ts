@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { AuthService } from '../../services/auth.service';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 
 
@@ -17,15 +18,14 @@ export class MyProductsComponent implements OnInit {
   userProducts: Product[] = [];
   public serverBaseUrl = '';
 
-  constructor( private authService: AuthService) {
+  constructor( private authService: AuthService,
+               private router: Router) {
 
     this.authService.retrieveUserProducts()
       .subscribe((products:any) => {
         console.log(products);
         console.log(`Esto: ${products.data['_id']}`)
-        this.userProducts = products.data
-        
-        
+        this.userProducts = products.data 
       })
    }
 
@@ -38,7 +38,8 @@ export class MyProductsComponent implements OnInit {
   removeProduct(id, index){
     this.authService.removeProduct(id)
     .subscribe(res => {
-      this.userProducts = this.userProducts.splice(index, 1);
+      // this.userProducts = this.userProducts.splice(index, 1);
+      // this.router.navigate(['/my-products']);
       console.log(res);
     })
   

@@ -31,7 +31,10 @@
                 type="text" 
                 class="form-control"
                 placeholder="Nombre"
-                required>
+                required
+                #username="ngModel">
+          <div *ngIf="username.errors?.required" class="form-control-feedback">
+            Este campo es requerido</div>
       </div>
 
       <div class="form-group">
@@ -40,7 +43,11 @@
                 name="location"
                 type="text" 
                 class="form-control"
-                placeholder="Ciudad" >
+                placeholder="Ciudad"
+                required
+                #location="ngModel">
+          <div *ngIf="location.errors?.required">Este campo es requerido</div>
+                
       </div> 
 
       <div class="form-group">
@@ -49,7 +56,10 @@
                 name="email"
                 type="email" 
                 class="form-control"
-                placeholder="email" >
+                placeholder="email"
+                required
+                #email="ngModel" >
+          <div *ngIf="email.errors?.required">Este campo es requerido</div>
       </div>
 
       <div class="form-group">
@@ -58,10 +68,13 @@
                 name="password"
                 type="password" 
                 class="form-control" 
-                placeholder="password" >
+                placeholder="password"
+                required
+                #password="ngModel">
+          <div *ngIf="password.errors?.required">Este campo es requerido</div>
       </div>
 
-      <button   [disabled]="!forma.valid"
+      <button  
                 type="submit" 
                 class="btn-send">
                 Enviar

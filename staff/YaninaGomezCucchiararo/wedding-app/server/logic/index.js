@@ -2,14 +2,6 @@
 
 const { models: { User, Product } } = require('data')
 
-const cloudinary = require('cloudinary')
-
-cloudinary.config({
-  cloud_name: 'drnwaftur',
-  api_key: '946871761846266',
-  api_secret:'BtBn8SZYFg_5z6Q5phLsCIYMdxg'
-});
-
 const logic = {
   /**
     *

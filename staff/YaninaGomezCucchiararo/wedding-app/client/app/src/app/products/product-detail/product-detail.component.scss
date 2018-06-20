@@ -8,6 +8,9 @@
   
   .left {
     grid-area: left-section;
+    height: 100%;
+    width: 100%;
+    padding: 5%;
   }
   
   .right {
@@ -17,4 +20,9 @@
   h3 {
     text-align: center;
     margin-top: 60px;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
 }

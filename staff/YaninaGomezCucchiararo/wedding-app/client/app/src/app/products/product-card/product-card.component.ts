@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 })
 export class ProductCardComponent implements OnInit {
 
-  @Input() product: any[] = []; //la propiedad product PUEDE VENIR DESDE FUERA "input"
+  @Input() product: any[] = [];
   @Input() productId: string;
 
   public serverBaseUrl = '';
@@ -22,7 +22,7 @@ export class ProductCardComponent implements OnInit {
   }
  
   goToProduct(id) {
-    console.log(this.productId)
+    
     this.router.navigate(['product', this.productId])
   }
 

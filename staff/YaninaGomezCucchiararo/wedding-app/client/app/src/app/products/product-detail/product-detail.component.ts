@@ -16,6 +16,14 @@ import { ProductsService } from '../../services/products.service';
 export class ProductDetailComponent implements OnInit {
   
   public product: Product[] = [];
+  public alertMessage;
+
+  public info: any = {
+    name: "",
+    surname:"",
+    email:"",
+    phone:""
+  }
 
   constructor( 
     private activatedRoute: ActivatedRoute,
@@ -23,15 +31,20 @@ export class ProductDetailComponent implements OnInit {
     
   { 
     this.activatedRoute.params.subscribe( params => {
-      // console.log(params['id']);
+      
       const product = params['id'];
       this.productService.getProduct(product)
         .subscribe((product : any) => {
-          console.log (product)
           this.product = product.data;
 
         })
     })
+  }
+
+  handlerSubmit() {
+    if(this.info){
+      this.alertMessage = 'Mensaje enviado al vendedor!';
+    } 
   }
 
   ngOnInit() {

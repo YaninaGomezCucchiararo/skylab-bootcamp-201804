@@ -27,8 +27,6 @@ export class MyProductsComponent implements OnInit {
   loadProducts() {
     this.authService.retrieveUserProducts()
       .subscribe((products: any) => {
-        console.log(products);
-        console.log(`Esto: ${products.data['_id']}`)
         this.userProducts = products.data
       })
   }
@@ -36,7 +34,6 @@ export class MyProductsComponent implements OnInit {
 
   ngOnInit() {
     this.serverBaseUrl = environment.serverBaseUrl;
-    console.log("Holaaa:", this.userProducts)
   }
 
   removeProduct(id, index) {
@@ -45,7 +42,5 @@ export class MyProductsComponent implements OnInit {
         this.loadProducts()
       },
         console.error)
-
   }
-
 }

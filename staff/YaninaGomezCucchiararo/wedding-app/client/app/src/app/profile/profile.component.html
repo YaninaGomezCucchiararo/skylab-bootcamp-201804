@@ -61,6 +61,11 @@
                           class="form-control" 
                           placeholder="Nueva contraseña" >
                 </div>
+              <div *ngIf="alertMessage">
+                <div class="alert alert-danger">
+                  {{alertMessage}}
+                </div>
+              </div>
         
               <button   [disabled]="!forma.valid"
                         type="submit" 

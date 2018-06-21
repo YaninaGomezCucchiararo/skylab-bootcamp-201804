@@ -17,6 +17,10 @@ export class AuthService {
   url: string = "http://localhost:5000/api/users";
   urlAuth: string = "http://localhost:5000/api/auth";
 
+  // url: string = "http://shielded-reef-60625.herokuapp.com/api/users";
+  // urlAuth: string = "http://shielded-reef-60625.herokuapp.com/api/auth";
+
+
   constructor(private http: HttpClient) {
   }
 
@@ -51,7 +55,7 @@ export class AuthService {
 
     return this.http.post(this.url, user)
       .pipe(map(res => {
-        console.log(res)
+        
         return res
       }))
 
@@ -65,7 +69,7 @@ export class AuthService {
 
     return this.http.post(this.urlAuth, params)
       .pipe(map(res => {
-          console.log(res)
+          
           return res
         }))
   }
@@ -80,13 +84,12 @@ export class AuthService {
 
   updateUser(dataUser) {
 
-    console.log(localStorage.getItem('token'));
+    
 
     let body = JSON.stringify(dataUser);
 
     return this.http.patch(`http://localhost:5000/api/users/${this.userData.id}`, dataUser, { headers: this.headers() })
       .pipe(map(res => {
-        console.log(res)
         return res
       }))
 
@@ -96,7 +99,6 @@ export class AuthService {
 
     return this.http.get(`http://localhost:5000/api/users/${this.userData.id}/products`, { headers: this.headers() })
       .pipe(map(res => {
-        console.log(res)
         return res
       }))
   }
@@ -119,20 +121,22 @@ export class AuthService {
     return this.http.post(`http://localhost:5000/api/users/${this.userData.id}/products`, fd, { headers: headers })
   }
 
+
+
   removeProduct(productId) {
 
     return this.http.delete(`http://localhost:5000/api/users/${this.userData.id}/products/${productId}`, { headers: this.headers() })
       .pipe(map(res => {
-        console.log(res)
         return res
       }))
   }
 
+
+  
   retrieveUser() {
 
     return this.http.get(`http://localhost:5000/api/users/${this.userData.id}`, { headers: this.headers() })
       .pipe(map(res => {
-        console.log(res)
         return res
       }))
   }

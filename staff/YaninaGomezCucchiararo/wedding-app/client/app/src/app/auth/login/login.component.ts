@@ -23,13 +23,11 @@ export class LoginComponent implements OnInit {
                private router: Router ) { }
 
   handlerSubmit() {
-
-    console.log(`el primero:` , this.params);
-
+    
     this.authService.login( this.params)
       .subscribe( (data: any) => {
         this.router.navigate(['home']);
-        console.log(data);
+       
         this.authService.setUserData(data.data);
       },
       error => { this.messageError = error.error.error });

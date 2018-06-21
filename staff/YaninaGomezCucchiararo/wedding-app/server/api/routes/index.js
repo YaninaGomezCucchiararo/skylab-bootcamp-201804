@@ -3,20 +3,27 @@ const bodyParser = require('body-parser')
 const logic = require('logic')
 const jwt = require('jsonwebtoken')
 const jwtValidation = require('./utils/jwt-validation')
+const cloudinary = require('cloudinary')
+
+cloudinary.config({
+  cloud_name: 'drnwaftur',
+  api_key: '946871761846266',
+  api_secret: 'BtBn8SZYFg_5z6Q5phLsCIYMdxg'
+});
 
 const multer = require('multer');
 // const upload = multer({ dest: 'uploads/' });
 
 const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, './uploads')
-	},
-	filename: (req, file, cb) => {
-		cb(null, file.originalname)
-	}
+  destination: (req, file, cb) => {
+    cb(null, './uploads')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
+  }
 });
-const upload = multer({ 
-	storage: storage
+const upload = multer({
+  storage: storage
 });
 
 const router = express.Router()
@@ -104,15 +111,21 @@ router.post('/users/:userId/products', [jwtValidator, upload.single('image')], (
   const { params: { userId }, body: { price, size, color, description } } = req
   const image = req.file.path.replace("\\", "/");
 
-  logic.addProductToUser(userId, image, +price, +size, color, description)
-    .then(() => {
-      res.status(201)
-      res.json({ status: 'OK' })
-    })
-    .catch(({ message }) => {
-      res.status(400)
-      res.json({ status: 'KO', error: message })
-    })
+  debugger
+
+  cloudinary.uploader.upload(image, function (result) {
+    debugger
+
+    logic.addProductToUser(userId, result.url, +price, +size, color, description)
+      .then(() => {
+        res.status(201)
+        res.json({ status: 'OK' })
+      })
+      .catch(({ message }) => {
+        res.status(400)
+        res.json({ status: 'KO', error: message })
+      })
+  })
 })
 
 router.get('/products', (req, res) => {
@@ -142,7 +155,7 @@ router.get('/products/:productId', (req, res) => {
 })
 
 router.get('/users/:userId/products', [jwtValidator, jsonBodyParser], (req, res) => {
-  const {params: {userId}} = req
+  const { params: { userId } } = req
 
   logic.retrieveUserProducts(userId)
     .then((products) => {
@@ -156,10 +169,10 @@ router.get('/users/:userId/products', [jwtValidator, jsonBodyParser], (req, res)
 })
 
 router.delete('/users/:userId/products/:productId', jwtValidator, (req, res) => {
-  const { params: { productId, userId }} = req
+  const { params: { productId, userId } } = req
 
   logic.deleteProduct(userId, productId)
-    .then((product)=> {
+    .then((product) => {
       console.log(res)
       res.status(200)
       res.json({ status: 'OK' })

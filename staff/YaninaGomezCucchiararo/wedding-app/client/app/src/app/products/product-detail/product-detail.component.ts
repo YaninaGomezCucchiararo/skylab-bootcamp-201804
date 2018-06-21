@@ -1,27 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-
-
 //Model:
 import { Product } from './../../models/product'
 
-
 //Service:
 import { ProductsService } from '../../services/products.service';
-import { environment } from '../../../environments/environment';
-
-
 
 @Component({
   selector: 'app-product-detail',
-  templateUrl: './product-detail.component.html',
+  templateUrl: './product-detail.component.html', 
   styleUrls: ['./product-detail.component.scss']
 })
 
 export class ProductDetailComponent implements OnInit {
   
-  public serverBaseUrl = '';
   public product: Product[] = [];
 
   constructor( 
@@ -42,7 +35,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.serverBaseUrl = environment.serverBaseUrl;
   }
 
 }

@@ -12,6 +12,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+ public messageError;
+
   params = {
     email: '',
     password: ''
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
         console.log(data);
         this.authService.agregarUserData(data.data);
       },
-      error => console.error(error));
+      error => { this.messageError = error.error.error });
   }
 
   ngOnInit() {

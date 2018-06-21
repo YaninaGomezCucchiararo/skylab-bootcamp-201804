@@ -17,8 +17,10 @@
       </h2>
     </div>
   </section>
+  
 
   <div class="grid-container ">
+     
     <div class="right">
       <form (ngSubmit)="handlerSubmit()" #forma="ngForm">
 
@@ -31,11 +33,16 @@
           <label for="pwd">PASSWORD</label>
           <input [(ngModel)]="params.password" name="password" type="password" class="form-control" placeholder="password">
         </div>
+        <div *ngIf="messageError">
+            <div class="alert alert-danger">
+              <strong>ERROR {{messageError}}</strong>
+            </div>
+          </div>
 
         <button [disabled]="!forma.valid" type="submit" class="btn-send">
           Entrar
         </button>
-
+       
       </form>
     </div>
   </div>

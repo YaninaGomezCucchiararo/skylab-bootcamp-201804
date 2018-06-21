@@ -49,6 +49,11 @@
           <input [(ngModel)]="user.password" name="password" type="password" class="form-control" placeholder="password" required #password="ngModel">
           <div *ngIf="password.errors?.required">Este campo es requerido</div>
         </div>
+        <div *ngIf="messageError">
+            <div class="alert alert-danger">
+              <strong>ERROR {{messageError}}</strong>
+            </div>
+          </div>
 
         <button type="submit" class="btn-send">
           Confirmar

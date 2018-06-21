@@ -18,6 +18,9 @@
 - ANGULAR 6
 - NODE
 - MONGOOSE
+- MOCHA
+- CHAI
+- COVERAGE
 ---
 #### DEVELOPER #### 
 ---

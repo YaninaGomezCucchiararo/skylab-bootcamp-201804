@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
+  public messageError;
+  
   user: User = {
     username: '',
     email: '',
@@ -29,6 +31,6 @@ export class RegisterComponent {
       .subscribe( data => {
         this.router.navigate(['/login']);
       },
-      error => console.error(error));
+      error => { this.messageError = error.error.error });
     }
 }

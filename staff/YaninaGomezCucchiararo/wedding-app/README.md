@@ -12,23 +12,17 @@
 #### TECNOLOGIES #### 
 ---
 
-- HTML
-- CSS
-- BOOTSTRAP
+- JAVASCRIPT
+- TYPESCRIPT
 - ANGULAR 6
 - NODE
 - MONGOOSE
+- HTML
+- CSS
+- BOOTSTRAP
 - MOCHA
 - CHAI
 - COVERAGE
-
-
----
-#### MOUNTING WORKSPACE ####
----
-
-
-
 
 ---
 #### DEVELOPER #### 

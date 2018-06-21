@@ -15,7 +15,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
 	public products: Product[] = [];
 	public productsFiltered: Product[] = [];
 	public loading: boolean = true;
-	private productsSubscription: Subscription = null;
+	private productsSubscription: Subscription = null; 
 
 	constructor(
 		private productsService: ProductsService,

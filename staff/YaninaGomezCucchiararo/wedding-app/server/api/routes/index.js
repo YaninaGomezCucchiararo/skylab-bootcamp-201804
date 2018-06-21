@@ -104,8 +104,6 @@ router.post('/users/:userId/products', [jwtValidator, upload.single('image')], (
   const { params: { userId }, body: { price, size, color, description } } = req
   const image = req.file.path.replace("\\", "/");
 
-  console.warn(image);
-
   logic.addProductToUser(userId, image, +price, +size, color, description)
     .then(() => {
       res.status(201)

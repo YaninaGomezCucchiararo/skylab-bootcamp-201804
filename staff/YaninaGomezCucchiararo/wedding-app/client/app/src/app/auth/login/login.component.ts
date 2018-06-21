@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       .subscribe( (data: any) => {
         this.router.navigate(['home']);
         console.log(data);
-        this.authService.agregarUserData(data.data);
+        this.authService.setUserData(data.data);
       },
       error => { this.messageError = error.error.error });
   }

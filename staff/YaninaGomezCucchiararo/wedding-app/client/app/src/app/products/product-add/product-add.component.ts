@@ -31,9 +31,9 @@ export class ProductAddComponent implements OnInit {
       size: +this.product.size
     })
       .subscribe(data => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['home']);
       },
-        error => console.error(error)
+        console.error
       );
   }
 

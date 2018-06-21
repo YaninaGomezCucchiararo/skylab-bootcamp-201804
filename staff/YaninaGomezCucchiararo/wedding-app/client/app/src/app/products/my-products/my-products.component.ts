@@ -18,16 +18,20 @@ export class MyProductsComponent implements OnInit {
   userProducts: Product[] = [];
   public serverBaseUrl = '';
 
-  constructor( private authService: AuthService,
-               private router: Router) {
+  constructor(private authService: AuthService,
+    private router: Router) {
 
+    this.loadProducts()
+  }
+
+  loadProducts() {
     this.authService.retrieveUserProducts()
-      .subscribe((products:any) => {
+      .subscribe((products: any) => {
         console.log(products);
         console.log(`Esto: ${products.data['_id']}`)
-        this.userProducts = products.data 
+        this.userProducts = products.data
       })
-   }
+  }
 
 
   ngOnInit() {
@@ -35,14 +39,13 @@ export class MyProductsComponent implements OnInit {
     console.log("Holaaa:", this.userProducts)
   }
 
-  removeProduct(id, index){
+  removeProduct(id, index) {
     this.authService.removeProduct(id)
-    .subscribe(res => {
-      // this.userProducts = this.userProducts.splice(index, 1);
-      // this.router.navigate(['/my-products']);
-      console.log(res);
-    })
-  
+      .subscribe(res => {
+        this.loadProducts()
+      },
+        console.error)
+
   }
-  
+
 }

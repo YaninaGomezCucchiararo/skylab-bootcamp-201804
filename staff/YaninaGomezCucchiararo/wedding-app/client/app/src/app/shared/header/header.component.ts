@@ -10,20 +10,19 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  public showHeader:boolean =false;
-
   constructor( private authservice: AuthService,
                private router: Router) { }
 
   ngOnInit() {
-    this.authservice.ifLogged.subscribe((value:boolean) =>{
-      this.showHeader = value;
-    })
+    
+  }
 
+  isLoggedIn() {
+    return this.authservice.isLoggedIn()
   }
 
   logout() {
-    this.showHeader = false;
+    this.authservice.logout()
     this.router.navigate(['']);
   }
 }

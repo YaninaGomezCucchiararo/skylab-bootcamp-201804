@@ -9,23 +9,15 @@ import { throwError, Subject } from 'rxjs';
 })
 export class AuthService {
 
-  public ifLogged = new Subject();
-
   users: User[] = [];
 
-  userData: any;
-
-  userId = localStorage.getItem('id');
+  userData: { id: string, token: string } = { id: localStorage.getItem('id'), token: localStorage.getItem('token') };
 
 
   url: string = "http://localhost:5000/api/users";
   urlAuth: string = "http://localhost:5000/api/auth";
 
-
   constructor(private http: HttpClient) {
-    console.log(this.userId)
-    this.cargarData()
-
   }
 
   headers() {
@@ -38,18 +30,11 @@ export class AuthService {
   //..............LOCAL STORAGE...........
   actualizarData() {
     localStorage.setItem("token", this.userData.token)
-    
-    this.userId = this.userData.id
+
     localStorage.setItem("id", this.userData.id)
   }
 
-  cargarData() {
-    if (localStorage.getItem("data")) {
-      this.users = JSON.parse(localStorage.getItem("data"))
-    }
-  }
-
-  agregarUserData(data: any) {
+  setUserData(data: any) {
     this.userData = data;
     this.actualizarData();
   }
@@ -79,21 +64,27 @@ export class AuthService {
     });
 
     return this.http.post(this.urlAuth, params)
-      .pipe(
-        tap(() => { this.ifLogged.next(true)}),
-        map(res => {
-        console.log(res)
-        return res
-      }))
+      .pipe(map(res => {
+          console.log(res)
+          return res
+        }))
   }
 
-  updateUser( dataUser ) {
+  isLoggedIn() {
+    return this.userData.id && this.userData.token
+  }
+
+  logout() {
+    this.setUserData({ id: '', token: '' })
+  }
+
+  updateUser(dataUser) {
 
     console.log(localStorage.getItem('token'));
 
     let body = JSON.stringify(dataUser);
 
-    return this.http.patch(`http://localhost:5000/api/users/${this.userId}`, dataUser, { headers: this.headers() })
+    return this.http.patch(`http://localhost:5000/api/users/${this.userData.id}`, dataUser, { headers: this.headers() })
       .pipe(map(res => {
         console.log(res)
         return res
@@ -102,17 +93,17 @@ export class AuthService {
   }
 
   retrieveUserProducts() {
-    
-    return this.http.get(`http://localhost:5000/api/users/${this.userId}/products`,{ headers: this.headers() })
-      .pipe(map ( res => {
+
+    return this.http.get(`http://localhost:5000/api/users/${this.userData.id}/products`, { headers: this.headers() })
+      .pipe(map(res => {
         console.log(res)
         return res
       }))
   }
 
 
-  addProduct (params) {
-    
+  addProduct(params) {
+
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     })
@@ -125,25 +116,25 @@ export class AuthService {
     fd.append('color', params.color);
     fd.append('description', params.description);
 
-    return this.http.post(`http://localhost:5000/api/users/${this.userId}/products`, fd, { headers: headers })
+    return this.http.post(`http://localhost:5000/api/users/${this.userData.id}/products`, fd, { headers: headers })
   }
 
-  removeProduct (productId) {
+  removeProduct(productId) {
 
-    return this.http.delete(`http://localhost:5000/api/users/${this.userId}/products/${productId}`,{ headers: this.headers() })
-    .pipe(map ( res => {
-      console.log(res)
-      return res
-    }))
+    return this.http.delete(`http://localhost:5000/api/users/${this.userData.id}/products/${productId}`, { headers: this.headers() })
+      .pipe(map(res => {
+        console.log(res)
+        return res
+      }))
   }
 
-  retrieveUser () {
-    
-    return this.http.get(`http://localhost:5000/api/users/${this.userId}`,{ headers: this.headers() })
-    .pipe(map ( res => {
-      console.log(res)
-      return res
-    }))
+  retrieveUser() {
+
+    return this.http.get(`http://localhost:5000/api/users/${this.userData.id}`, { headers: this.headers() })
+      .pipe(map(res => {
+        console.log(res)
+        return res
+      }))
   }
 
 }

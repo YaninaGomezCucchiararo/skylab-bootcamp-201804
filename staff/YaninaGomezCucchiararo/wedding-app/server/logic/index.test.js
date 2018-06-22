@@ -30,7 +30,7 @@ describe('logic wedding-app', () => {
         return Promise.all([User.remove(), Product.deleteMany()])
     })
 
-    false && describe('resgister user', () => {
+    describe('resgister user', () => {
         it('should succeed on correct data', () => {
             logic.registerUser('yanina', 'Barcelona', 'y@gmail.com', '123')
                 .then(res => expect(res).to.be.true)
@@ -94,7 +94,7 @@ describe('logic wedding-app', () => {
         )
     })
 
-    false && describe('authenticate user', () => {
+    describe('authenticate user', () => {
         it('should succeed on correct data', () =>
             User.create(userData)
                 .then(() =>
@@ -134,12 +134,12 @@ describe('logic wedding-app', () => {
         )
     })
 
-    false && describe('retrieve user', () => {
+    describe('retrieve user', () => {
         it('should succeed on correct data', () =>
             User.create(userData)
                 .then(({ id }) => {
                     return logic.retrieveUser(id)
-                    //crear producto
+                    
                 })
                 .then(user => {
                     expect(user).to.exist
@@ -172,7 +172,7 @@ describe('logic wedding-app', () => {
         )
     })
     //===================Update===================//
-    false && describe('udpate user', () => {
+    describe('udpate user', () => {
         it('should succeed on correct data', () =>
             User.create(userData)
                 .then(({ id }) => {
@@ -286,7 +286,7 @@ describe('logic wedding-app', () => {
     })
 
     //==================Unregister====================//
-    false && describe('unregister user', () => {
+    describe('unregister user', () => {
         it('should succeed on correct data', () =>
             User.create(userData)
                 .then(({ id }) => {
@@ -353,9 +353,9 @@ describe('logic wedding-app', () => {
         it('should succeed on correct data', () =>
             User.create(userData)
                 .then(({ id: userId }) => {
-                    const { image, price, size, color } = productData
+                    const { image, price, size, color, description } = productData
 
-                    return logic.addProductToUser(userId, image, price, size, color)
+                    return logic.addProductToUser(userId, image, price, size, color, description)
                         .then(productId => {
                             expect(productId).to.exist
                             expect(productId).to.be.a('string')
@@ -376,9 +376,9 @@ describe('logic wedding-app', () => {
                 })
         )
     })
-//==================== List Products =====================//
+    //==================== List Products =====================//
     describe('list products', () => {
-        const product = { owner: '123456781234567812345678', image: 'image', price: 200, size: 42, color: 'white' }
+        const product = { owner: '123456781234567812345678', image: 'image', price: 200, size: 42, color: 'white', description: "vestido blanco" }
 
         it('should succeed on correct data', () => {
             return Promise.all([
@@ -387,32 +387,41 @@ describe('logic wedding-app', () => {
                 .then(([product]) => {
                     return logic.listProducts()
                         .then(res => {
-                            console.log(res)
+                            
                             expect(res.length).to.be.equal(1)
                             expect(res[0]._id).to.be.exist
                             expect(res[0].owner).to.be.exist
                             expect(res[0].image).to.be.equal('image')
                             expect(res[0].price).to.be.exist
                             expect(res[0].price).to.be.equal(200)
+                            expect(res[0].description).to.be.equal('vestido blanco')
                         })
                 })
         })
     })
-//====================  Info Product =====================//
+    //====================  Info Product =====================//
     describe('info product', () => {
         const product = { owner: '123456781234567812345678', image: 'image', price: 200, size: 42, color: 'white' }
 
         it('should succed on correct data', () => {
-           Product.create(product)
-            .then(({_id}) => {
-                console.log(res)
-            })
+            Product.create(product)
+                .then(({ _id }) => {
+                    
+                    return productInfo(_id)
+                        .then(res => {
+                            expect(res.length).to.be.exist
+                            expect(res[0]._id).to.be.exist
+                            expect(res[0].owner).to.be.exist
+                            expect(res[0].image).to.be.equal('image')
+                            expect(res[0].price).to.be.exist
+                            expect(res[0].price).to.be.equal(200)
+                            expect(res[0].description).to.be.equal('vestido blanco')
+                        })
+                })
+        })
+
+        after(done => mongoose.connection.db.dropDatabase(() => mongoose.connection.close(done))) // cerrar la base de datos una vez finalice la bateria de test
     })
-
-
-
-    after(done => mongoose.connection.db.dropDatabase(() => mongoose.connection.close(done))) // cerrar la base de datos una vez finalice la bateria de test
-})
 
 
 })

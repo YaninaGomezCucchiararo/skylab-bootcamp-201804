@@ -189,6 +189,17 @@ const logic = {
       .then(() => true)
   },
 
+  /**
+   * @param {string} ownerid
+   * @param {string} image
+   * @param {string} price
+   * @param {string} size
+   * @param {string} color
+   * @param {string} description
+   * 
+   * @return {Promise<string>}
+   */
+
   addProductToUser (ownerId, image = '', price, size, color, description) {
     return Promise.resolve()
       .then(() => {
@@ -219,6 +230,10 @@ const logic = {
       })
   },
 
+  /**
+   * @returns {Promise<Product>}
+   */
+
   listProducts () {
     return Promise.resolve()
       .then(() => {
@@ -228,6 +243,12 @@ const logic = {
           })
       })
   },
+
+  /**
+   * @param {string} productId
+   * 
+   * @return {Promise<Product>}
+   */
 
   productInfo (productId) {
     return Promise.resolve()
@@ -245,6 +266,13 @@ const logic = {
         return product
       })
   },
+
+  /**
+   * 
+   * @param {string} userId
+   * 
+   * @return {Promise<Product>}
+   */
 
   retrieveUserProducts (userId) {
     return Promise.resolve()
@@ -265,6 +293,14 @@ const logic = {
         return userProducts
       })
   },
+
+  /**
+   * 
+   * @param {string} userId 
+   * @param {string} productId 
+   * 
+   * @return {Promise<boolean>}
+   */
 
   deleteProduct ( userId, productId ) {
     return Promise.resolve()

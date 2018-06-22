@@ -14,14 +14,18 @@ export class AuthService {
   userData: { id: string, token: string } = { id: localStorage.getItem('id'), token: localStorage.getItem('token') };
 
 
-  // url: string = "http://localhost:5000/api/users";
-  // urlAuth: string = "http://localhost:5000/api/auth";
+  _url: string = "http://localhost:5000/api";
+  _urlAuth: string = "http://localhost:5000/api/auth";
+
+  url: string = "http://192.168.0.32:5000/api";
+  urlAuth: string = "http://192.168.0.32:5000/api/auth";
+  
 
   // url: string = "http://shielded-reef-60625.herokuapp.com/api/users";
   // urlAuth: string = "http://shielded-reef-60625.herokuapp.com/api/auth";
 
-  url: string = "https://fierce-reaches-16715.herokuapp.com/api";
-  urlAuth: string = "https://fierce-reaches-16715.herokuapp.com/api/auth";
+  // url: string = "https://fierce-reaches-16715.herokuapp.com/api";
+  // urlAuth: string = "https://fierce-reaches-16715.herokuapp.com/api/auth";
 
   constructor(private http: HttpClient) {
   }
@@ -55,7 +59,7 @@ export class AuthService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.post(`${this.url}/users`, user)
+    return this.http.post(`${this.url}`, user)
       .pipe(map(res => {
         
         return res

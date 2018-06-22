@@ -9,16 +9,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductsService {
 
+  url: string = "https://fierce-reaches-16715.herokuapp.com/api";
+
   constructor(
     private http: HttpClient
   ) { }
 
   getProducts(){
-    return this.http.get('http://localhost:5000/api/products')
+    return this.http.get(`${this.url}/products`)
   }
 
   getProduct(id) {
 
-    return this.http.get(`http://localhost:5000/api/products/${id}`)
+    return this.http.get(`${this.url}/products/${id}`)
   }
 }  

@@ -14,12 +14,14 @@ export class AuthService {
   userData: { id: string, token: string } = { id: localStorage.getItem('id'), token: localStorage.getItem('token') };
 
 
-  url: string = "http://localhost:5000/api/users";
-  urlAuth: string = "http://localhost:5000/api/auth";
+  // url: string = "http://localhost:5000/api/users";
+  // urlAuth: string = "http://localhost:5000/api/auth";
 
   // url: string = "http://shielded-reef-60625.herokuapp.com/api/users";
   // urlAuth: string = "http://shielded-reef-60625.herokuapp.com/api/auth";
 
+  url: string = "https://fierce-reaches-16715.herokuapp.com/api";
+  urlAuth: string = "https://fierce-reaches-16715.herokuapp.com/api/auth";
 
   constructor(private http: HttpClient) {
   }
@@ -53,7 +55,7 @@ export class AuthService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.post(this.url, user)
+    return this.http.post(`${this.url}/users`, user)
       .pipe(map(res => {
         
         return res
@@ -88,7 +90,7 @@ export class AuthService {
 
     let body = JSON.stringify(dataUser);
 
-    return this.http.patch(`http://localhost:5000/api/users/${this.userData.id}`, dataUser, { headers: this.headers() })
+    return this.http.patch(`${this.url}/users/${this.userData.id}`, dataUser, { headers: this.headers() })
       .pipe(map(res => {
         return res
       }))
@@ -97,7 +99,7 @@ export class AuthService {
 
   retrieveUserProducts() {
 
-    return this.http.get(`http://localhost:5000/api/users/${this.userData.id}/products`, { headers: this.headers() })
+    return this.http.get(`${this.url}/users/${this.userData.id}/products`, { headers: this.headers() })
       .pipe(map(res => {
         return res
       }))
@@ -118,14 +120,14 @@ export class AuthService {
     fd.append('color', params.color);
     fd.append('description', params.description);
 
-    return this.http.post(`http://localhost:5000/api/users/${this.userData.id}/products`, fd, { headers: headers })
+    return this.http.post(`${this.url}/users/${this.userData.id}/products`, fd, { headers: headers })
   }
 
 
 
   removeProduct(productId) {
 
-    return this.http.delete(`http://localhost:5000/api/users/${this.userData.id}/products/${productId}`, { headers: this.headers() })
+    return this.http.delete(`${this.url}/users/${this.userData.id}/products/${productId}`, { headers: this.headers() })
       .pipe(map(res => {
         return res
       }))
@@ -135,7 +137,7 @@ export class AuthService {
   
   retrieveUser() {
 
-    return this.http.get(`http://localhost:5000/api/users/${this.userData.id}`, { headers: this.headers() })
+    return this.http.get(`${this.url}/users/${this.userData.id}`, { headers: this.headers() })
       .pipe(map(res => {
         return res
       }))
